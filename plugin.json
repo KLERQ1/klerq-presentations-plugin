@@ -1,0 +1,7 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "klerq-deck-builder",
+  "version": "1.0.0",
+  "description": "Build a client pitch from KLERQ content: interview the user chapter by chapter, create the presentation in KLERQ, and export it to PowerPoint.",
+  "keywords": ["klerq", "presentation", "pitch", "legal", "business-development"]
+}
