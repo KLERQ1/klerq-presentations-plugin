@@ -59,6 +59,8 @@ openai = {
         "category": "Business & Operations",
         "capabilities": ["Interactive", "Read", "Write"],
         "websiteURL": "https://klerq.io",
+        "privacyPolicyURL": "https://klerq.io/security#compliance-documents",
+        "termsOfServiceURL": "https://klerq.io/security#compliance-documents",
         "screenshots": [],
         "defaultPrompt": [
             "Build a presentation for Van Doorne about faster pitching",
