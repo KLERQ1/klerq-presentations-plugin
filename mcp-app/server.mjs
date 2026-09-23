@@ -72,6 +72,16 @@ export function createServer() {
   };
   const UNKNOWN_UI =
     " If the form is not visible in the chat, this client cannot render it: continue in plain chat mode and ask the chapters as numbered questions.";
+  // Some hosts (Microsoft 365 Copilot among them) render MCP Apps without
+  // declaring the client capability, so a missing capability only softens the
+  // wording. Set STRICT_UI=1 to refuse the form for clients that declare no UI support.
+  const logClient = (ctx, tool, ui) => {
+    try {
+      const info = typeof server.server?.getClientVersion === "function" ? server.server.getClientVersion() : undefined;
+      const caps = typeof server.server?.getClientCapabilities === "function" ? server.server.getClientCapabilities() : undefined;
+      console.log(JSON.stringify({ tool, ui, client: info, capabilities: caps, meta: ctx?.mcpReq?._meta }));
+    } catch {}
+  };
 
   registerAppTool(
     server,
@@ -85,11 +95,12 @@ export function createServer() {
         brief: z.string().optional().describe("Optional text to prefill the brief box with. Leave empty to show the example story."),
       }),
       annotations: { readOnlyHint: true, openWorldHint: false },
-      _meta: { ui: { resourceUri: UI.brief } },
+      _meta: { ui: { resourceUri: UI.brief, visibility: ["model", "app"] } },
     },
     async (args, ctx) => {
       const ui = supportsUi(ctx);
-      if (ui === false) {
+      logClient(ctx, "presentation_brief", ui);
+      if (ui === false && STRICT_UI) {
         return {
           content: [
             {
@@ -106,7 +117,7 @@ export function createServer() {
             text:
               "The brief box is open in the chat. Load the KLERQ data now (clients, presentations, specialists, matters) in the same turn, " +
               "then end the turn with one line. The brief arrives as a message starting with \"[Presentation form] Brief\"." +
-              (ui === undefined ? UNKNOWN_UI : ""),
+              (ui === true ? "" : UNKNOWN_UI),
           },
         ],
       };
@@ -129,11 +140,12 @@ export function createServer() {
           .describe("The form data block: the JSON that would go between DATA_START and DATA_END in the skill's form template."),
       }),
       annotations: { readOnlyHint: true, openWorldHint: false },
-      _meta: { ui: { resourceUri: UI.form } },
+      _meta: { ui: { resourceUri: UI.form, visibility: ["model", "app"] } },
     },
     async ({ data }, ctx) => {
       const ui = supportsUi(ctx);
-      if (ui === false) return { content: [{ type: "text", text: NO_UI }] };
+      logClient(ctx, "presentation_form", ui);
+      if (ui === false && STRICT_UI) return { content: [{ type: "text", text: NO_UI }] };
       const chapters = Array.isArray(data?.chapters) ? data.chapters.join(", ") : "default chapters";
       return {
         content: [
@@ -142,7 +154,7 @@ export function createServer() {
             text:
               `The presentation form is open in the chat (client: ${data?.general?.client || "not set"}; chapters: ${chapters}). ` +
               'Do not repeat its contents. End the turn with one short line; the answers arrive as a message starting with "[Presentation form] Approve".' +
-              (ui === undefined ? UNKNOWN_UI : ""),
+              (ui === true ? "" : UNKNOWN_UI),
           },
         ],
         _meta: { "klerq/data": data },
@@ -162,6 +174,7 @@ export function createServer() {
 const PORT = Number(process.env.PORT || 3033);
 const HOST = process.env.HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
 const STATELESS = /^(1|true|yes)$/i.test(process.env.STATELESS || "");
+const STRICT_UI = /^(1|true|yes)$/i.test(process.env.STRICT_UI || "");
 const SESSION_TTL_MS = Number(process.env.SESSION_TTL_MS || 30 * 60 * 1000);
 const allowedHosts = process.env.ALLOWED_HOSTS
   ? process.env.ALLOWED_HOSTS.split(",").map((s) => s.trim()).filter(Boolean)

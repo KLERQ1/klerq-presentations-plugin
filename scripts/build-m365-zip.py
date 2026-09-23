@@ -71,6 +71,10 @@ for name, pl in (("klerq-plugin.json", klerq), ("klerq-form-plugin.json", form))
     rt = pl["runtimes"][0]
     if rt["type"] != "RemoteMCPServer": errors.append(f"{name}: runtime type must be RemoteMCPServer")
     if not rt["spec"]["url"].startswith("https://"): errors.append(f"{name}: MCP url must be https")
+    if rt.get("run_for_functions") == ["*"]:
+        if pl.get("functions"): errors.append(f"{name}: dynamic tool discovery needs an empty functions array")
+        if rt["spec"].get("mcp_tool_description"): errors.append(f"{name}: dynamic tool discovery must not pin tool descriptions")
+        continue
     desc = rt["spec"].get("mcp_tool_description", {})
     tlist = desc.get("tools") or (tools["tools"] if desc.get("file") == "klerq-tools.json" else [])
     tnames = [t["name"] for t in tlist]

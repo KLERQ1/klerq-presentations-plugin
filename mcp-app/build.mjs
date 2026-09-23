@@ -12,7 +12,7 @@ mkdirSync(dist, { recursive: true });
 
 const bridge = readFileSync(resolve(here, "ui", "bridge.js"), "utf8");
 
-const BASE_CSS = `:root{--radius:8px}html,body{margin:0;padding:0;background:transparent}
+const BASE_CSS = `:root{--radius:8px}html,body{margin:0;padding:0;background:transparent;overflow:hidden}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px}`;
 

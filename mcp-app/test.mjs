@@ -96,16 +96,27 @@ await ui.close();
 // --- Host without MCP Apps support (e.g. a terminal client) ---
 const plain = await connect(false);
 
-await check("presentation_brief without UI support tells the model to fall back to chat", async () => {
+await check("presentation_brief without declared UI support still opens, with the fallback hint", async () => {
   const r = await plain.callTool({ name: "presentation_brief", arguments: {} });
-  assert.match(r.content[0].text, /cannot show the KLERQ form/);
+  assert.match(r.content[0].text, /brief box is open/);
+  assert.match(r.content[0].text, /If the form is not visible/);
   assert.match(r.content[0].text, /plain chat mode/);
 });
 
-await check("presentation_form without UI support falls back too and sends no data", async () => {
+await check("presentation_form without declared UI support still carries the data and the hint", async () => {
   const r = await plain.callTool({ name: "presentation_form", arguments: { data: sample } });
-  assert.match(r.content[0].text, /cannot show the KLERQ form/);
-  assert.equal(r._meta?.["klerq/data"], undefined);
+  assert.match(r.content[0].text, /form is open/);
+  assert.match(r.content[0].text, /If the form is not visible/);
+  assert.deepEqual(r._meta?.["klerq/data"], sample);
+});
+
+await check("UI-capable host gets no fallback hint", async () => {
+  const c = await connect(true);
+  const r = await c.callTool({ name: "presentation_brief", arguments: {} });
+  assert.doesNotMatch(r.content[0].text, /If the form is not visible/);
+  const { tools } = await c.listTools();
+  for (const t of tools) assert.deepEqual(t._meta?.ui?.visibility, ["model", "app"]);
+  await c.close();
 });
 
 await plain.close();

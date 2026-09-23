@@ -5,75 +5,18 @@
   "namespace": "klerqform",
   "description_for_human": "Inline brief box and chapter form for building a KLERQ presentation",
   "description_for_model": "Renders the KLERQ deck builder's interview inline in the chat: presentation_brief shows the brief box, presentation_form shows the chapter-by-chapter form prefilled from the brief. Both send the user's answers back as a chat message. Use them at the start of a deck-building run when the client can render MCP Apps; if they answer that the form cannot be shown, continue in chat mode.",
-  "functions": [
-    {
-      "name": "presentation_brief",
-      "description": "Step 1 of the KLERQ deck builder. Shows the brief box inline: one text box asking what the presentation is for. Call it before loading any KLERQ data. The user's brief comes back as a chat message starting with \"[Presentation form] Brief\".",
-      "capabilities": {
-        "security_info": {
-          "data_handling": ["DataTransform"]
-        }
-      }
-    },
-    {
-      "name": "presentation_form",
-      "description": "Step 2 of the KLERQ deck builder. Renders the chapter-by-chapter form inline, prefilled from the brief. Pass the complete form data JSON as the data argument, with phase \"rest\" and never any KLERQ record ids. The user's approved choices come back as a chat message starting with \"[Presentation form] Approve\".",
-      "capabilities": {
-        "security_info": {
-          "data_handling": ["DataTransform"]
-        }
-      }
-    }
-  ],
+  "functions": [],
   "runtimes": [
     {
       "type": "RemoteMCPServer",
       "auth": {
         "type": "None"
       },
-      "run_for_functions": ["presentation_brief", "presentation_form"],
+      "run_for_functions": [
+        "*"
+      ],
       "spec": {
-        "url": "https://klerq-presentations-plugin.onrender.com/mcp",
-        "mcp_tool_description": {
-          "tools": [
-            {
-              "name": "presentation_brief",
-              "description": "Step 1 of the KLERQ deck builder. Shows the brief box inline: one text box asking what the presentation is for. Call it before loading any KLERQ data. The user's brief comes back as a chat message starting with \"[Presentation form] Brief\".",
-              "inputSchema": {
-                "type": "object",
-                "properties": {
-                  "brief": {
-                    "type": "string",
-                    "description": "Optional text to prefill the brief box with. Leave empty to show the example story."
-                  }
-                }
-              },
-              "_meta": {
-                "ui": { "resourceUri": "ui://klerq/brief.html" },
-                "ui/resourceUri": "ui://klerq/brief.html"
-              }
-            },
-            {
-              "name": "presentation_form",
-              "description": "Step 2 of the KLERQ deck builder. Renders the chapter-by-chapter form inline, prefilled from the brief. Pass the complete form data JSON (clients, texts, specialists, industries, highlights, general, recommendations, drafts) as the data argument, with \"phase\": \"rest\". Never include KLERQ record ids. The user's approved choices come back as a chat message starting with \"[Presentation form] Approve\".",
-              "inputSchema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "description": "The form data block: general, clients, texts, textRecs, specialists, industries, highlights, chapters, ai, aiFields, aiDrafts, bioDrafts, pricing, textIns, brief, phase.",
-                    "additionalProperties": true
-                  }
-                },
-                "required": ["data"]
-              },
-              "_meta": {
-                "ui": { "resourceUri": "ui://klerq/form.html" },
-                "ui/resourceUri": "ui://klerq/form.html"
-              }
-            }
-          ]
-        }
+        "url": "https://klerq-presentations-plugin.onrender.com/mcp"
       }
     }
   ]
