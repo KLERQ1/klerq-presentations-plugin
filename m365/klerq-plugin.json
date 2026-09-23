@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+  "schema_version": "v2.4",
+  "name_for_human": "KLERQ",
+  "namespace": "klerq",
+  "description_for_human": "The firm's KLERQ knowledge base: matters, work highlights, specialists, clients and presentations",
+  "description_for_model": "KLERQ is the firm's knowledge base of matters, clients, contacts, specialists, work highlights, submissions and presentations (pitches). Use it to load the content for a pitch, to create the presentation record and to export it to PowerPoint. Record ids in results are handles for follow-up calls only; present every record to the user by name or title, never by id. Prefer the find_* and *_overview tools for questions; use *_get for one record and create/update only for changes the user asked for.",
+  "contact_email": "accounts@klerq.io",
+  "privacy_policy_url": "https://klerq.io/privacy",
+  "legal_info_url": "https://klerq.io/terms",
+  "functions": [
+    { "name": "find_clients", "description": "Search clients (companies) by name, type, active or archived, or by relational filters such as pitched but not submitted since a date.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "find_presentations", "description": "Search presentations (pitches) by status, language, date windows, client name or specialist name.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "find_specialists", "description": "Search the firm's specialists by name, role, office, active or archived, or by recent usage in submissions and presentations.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "find_matters", "description": "Search matters by status, date windows, client name or responsible user.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "specialists_get", "description": "Get one specialist with role, practices, industries and bio versions.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "matter_overview", "description": "Get a matter together with all its work highlights in one call.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "presentations_get", "description": "Get one presentation with its chapters and their content.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "presentations_create", "description": "Create a presentation with its chapters. Only after the user approved the overview.", "capabilities": { "confirmation": { "type": "AdaptiveCard", "title": "Create presentation in KLERQ", "body": "Create this presentation with the approved chapters?" }, "security_info": { "data_handling": ["ResourceStateUpdate"] } } },
+    { "name": "presentations_update", "description": "Update an existing presentation or its chapters.", "capabilities": { "confirmation": { "type": "AdaptiveCard", "title": "Update presentation in KLERQ", "body": "Apply these changes to the presentation?" }, "security_info": { "data_handling": ["ResourceStateUpdate"] } } },
+    { "name": "export_presentation", "description": "Render a presentation to PowerPoint or Word through one of the firm's export templates and return a download link valid for 15 minutes. Call without template to list the templates.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData", "ResourceStateUpdate"] } } },
+    { "name": "find_work_highlights", "description": "Search a matter's work highlights by status, specialist or confidentiality.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "work_highlights_get", "description": "Get one work highlight of a matter.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "matters_get", "description": "Get one matter.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "clients_get", "description": "Get one client.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "search", "description": "Semantic search across the whole workspace: matters, clients, contacts, presentations, submissions, work highlights.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } },
+    { "name": "find_experience", "description": "Find relevant firm experience and precedents (matters and work highlights) by a text query or similar to a reference matter.", "capabilities": { "security_info": { "data_handling": ["GetPrivateData"] } } }
+  ],
+  "runtimes": [
+    {
+      "type": "RemoteMCPServer",
+      "auth": {
+        "type": "OAuthPluginVault",
+        "reference_id": "REPLACE_WITH_AUTH_CONFIG_ID"
+      },
+      "run_for_functions": [
+        "find_clients", "find_presentations", "find_specialists", "find_matters",
+        "specialists_get", "matter_overview", "presentations_get", "presentations_create",
+        "presentations_update", "export_presentation", "find_work_highlights",
+        "work_highlights_get", "matters_get", "clients_get", "search", "find_experience"
+      ],
+      "spec": {
+        "url": "https://klerq.mcp.klerq.app/mcp",
+        "mcp_tool_description": {
+          "file": "klerq-tools.json"
+        }
+      }
+    }
+  ],
+  "capabilities": {
+    "conversation_starters": [
+      { "title": "Build a pitch", "text": "Build a presentation for [client] about [topic]" }
+    ]
+  }
+}

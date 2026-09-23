@@ -119,3 +119,22 @@ To get the ids: ChatGPT → Settings → Security and login → Developer mode o
 chatgpt.com/plugins → plus → add each MCP server URL (KLERQ, then the form server); open the
 new app and copy the `plugin_asdk_app_…` id from the browser URL. The script strips the
 `plugin_` prefix.
+
+## Microsoft 365 Copilot package
+
+`m365/` holds a Microsoft 365 app package: a Teams app manifest (v1.22) that references a
+declarative agent (schema v1.8) with two MCP plugins (schema v2.4, `RemoteMCPServer`
+runtimes): the KLERQ server (OAuth via the Enterprise token store) and the form server
+(anonymous, MCP Apps widgets). The skill's instructions are condensed into the agent's
+`instructions` (limit 8,000 characters). `scripts/build-m365-zip.py` validates the files and
+builds `klerq-deck-builder-m365.zip` next to the repo folder; `scripts/validate-m365.py`
+checks them against Microsoft's JSON schemas.
+
+```bash
+python scripts/build-m365-zip.py --auth-ref <auth config id>
+```
+
+The auth config id comes from Microsoft 365 Agents Toolkit (choose dynamic client
+registration for the KLERQ server; it publishes a registration endpoint) or from the Teams
+developer portal (OAuth client registration). Upload the zip in the Microsoft 365 admin
+center under Integrated apps → Upload custom apps.

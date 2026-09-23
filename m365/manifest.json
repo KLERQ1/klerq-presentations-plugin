@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
+  "version": "1.0.0",
+  "id": "5d2f6c1e-3b7a-4e8c-9f21-7a0c4b6d8e13",
+  "developer": {
+    "name": "KLERQ",
+    "websiteUrl": "https://klerq.io",
+    "privacyUrl": "https://klerq.io/privacy",
+    "termsOfUseUrl": "https://klerq.io/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "KLERQ deck builder",
+    "full": "KLERQ deck builder for Microsoft 365 Copilot"
+  },
+  "description": {
+    "short": "Build client pitches from KLERQ content",
+    "full": "Build a client presentation from what your firm already has in KLERQ: matters, work highlights, specialist bios, client references and texts from earlier pitches. Give a short brief, choose the content chapter by chapter, and the presentation is created in KLERQ and exported to PowerPoint through the firm's export templates."
+  },
+  "accentColor": "#1C2530",
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "klerqDeckBuilder",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "validDomains": [
+    "klerq.mcp.klerq.app",
+    "klerq-presentations-plugin.onrender.com"
+  ]
+}

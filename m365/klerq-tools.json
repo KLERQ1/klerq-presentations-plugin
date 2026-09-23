@@ -1,0 +1,276 @@
+{
+  "tools": [
+    {
+      "name": "find_clients",
+      "description": "Search clients (companies), with deep relational filters. Basic: name, clientTypes, active/archived. Relational: pitchedNotSubmittedSince, inSubmissionsSince, withMattersSince. Ids in results are handles for follow-up tool calls only; present records to the user by name, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Substring to match in the client name." },
+          "clientTypes": { "type": "string", "description": "Comma-separated client classifications to match." },
+          "includeArchived": { "type": "boolean" },
+          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 },
+          "pitchedNotSubmittedSince": { "type": "string", "description": "Clients we made a presentation for on/after this ISO date but have not submitted for in the same window." },
+          "inSubmissionsSince": { "type": "string", "description": "Only clients referenced by a submission created on/after this ISO date." },
+          "withMattersSince": { "type": "string", "description": "Only clients with a matter created on/after this ISO date." }
+        }
+      }
+    },
+    {
+      "name": "find_presentations",
+      "description": "Search presentations (pitches). Server-side: status, language, created/deadline windows. Relational: forClient / involvingSpecialist (by name or id), usingWorkHighlightId. Client and specialists are returned with resolved names. Ids are handles for follow-up calls only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Substring to match in the presentation title." },
+          "status": { "type": "string", "description": "Comma-separated statuses. Allowed: CLOSING, DRAFT, REVIEW, SENT, CLOSED_WON, CLOSED_LOST, TRASH." },
+          "language": { "type": "string", "description": "Match a language tag exactly." },
+          "forClient": { "type": "string", "description": "Only presentations for this client, by name." },
+          "forClientId": { "type": "string", "description": "Only presentations for this client id." },
+          "involvingSpecialist": { "type": "string", "description": "Only presentations whose chapters reference this specialist, by name." },
+          "involvingSpecialistId": { "type": "string" },
+          "usingWorkHighlightId": { "type": "string" },
+          "createdAfter": { "type": "string", "description": "Created on/after this ISO date." },
+          "createdBefore": { "type": "string" },
+          "deadlineAfter": { "type": "string" },
+          "deadlineBefore": { "type": "string" },
+          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+        }
+      }
+    },
+    {
+      "name": "find_specialists",
+      "description": "Search the firm's specialists by name, roleId, officeId, active/archived, or by usage in submissions and presentations since a date (usedSince, usedUntil, submissionDirectoryId). Ids are handles for follow-up calls only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Substring to match in the specialist's given/family name." },
+          "roleId": { "type": "string" },
+          "officeId": { "type": "string" },
+          "includeArchived": { "type": "boolean", "description": "Include archived specialists (default: active only)." },
+          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200, "description": "Max specialists to return (default 50)." },
+          "usedSince": { "type": "string", "description": "Only specialists referenced by a submission or presentation created on/after this ISO date." },
+          "usedUntil": { "type": "string" },
+          "submissionDirectoryId": { "type": "string" },
+          "dateField": { "type": "string", "enum": ["created", "deadline"] }
+        }
+      }
+    },
+    {
+      "name": "find_matters",
+      "description": "Search matters. Server-side: status, active/archived, created/updated/endDate windows. Relational: forClient (by name) or forClientId, withResponsibleUserId. Matter clients are returned with resolved names. Ids are handles for follow-up calls only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Substring to match in the internal matter name." },
+          "status": { "type": "string", "description": "Comma-separated statuses. Allowed: ONGOING, COMPLETED." },
+          "forClient": { "type": "string", "description": "Only matters involving this client, by name." },
+          "forClientId": { "type": "string" },
+          "withResponsibleUserId": { "type": "string" },
+          "includeArchived": { "type": "boolean" },
+          "createdAfter": { "type": "string" },
+          "createdBefore": { "type": "string" },
+          "updatedAfter": { "type": "string" },
+          "endDateAfter": { "type": "string" },
+          "endDateBefore": { "type": "string" },
+          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+        }
+      }
+    },
+    {
+      "name": "specialists_get",
+      "description": "Get a specialist with role, practices, industries and bio versions. Present the record by name, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "id": { "type": "string", "minLength": 1 } },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "matter_overview",
+      "description": "Composite read of a matter and its work highlights in one call. Present records by name or title, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "matterId": { "type": "string", "minLength": 1, "description": "The id of the matter to summarize." } },
+        "required": ["matterId"]
+      }
+    },
+    {
+      "name": "presentations_get",
+      "description": "Get a presentation with its chapters and content. Present the record by title, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "id": { "type": "string", "minLength": 1 } },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "presentations_create",
+      "description": "Create a presentation (pitch) with its chapters. Present the result by title, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "language": { "type": "string", "description": "ISO 639-2 three-letter code (e.g. eng, nld, deu, fra)." },
+          "clientId": { "type": "string" },
+          "status": { "type": "string", "enum": ["CLOSING", "DRAFT", "REVIEW", "SENT", "CLOSED_WON", "CLOSED_LOST", "TRASH"] },
+          "deadline": { "type": "string" },
+          "presentationRequirements": { "type": "string" },
+          "estimatedValue": { "type": "number" },
+          "successRate": { "type": "number", "minimum": 0, "maximum": 100 },
+          "source": { "type": "string" },
+          "contacts": { "type": "array", "items": { "type": "string" }, "description": "FirmRelation ids (contacts)." },
+          "labels": { "type": "array", "items": { "type": "string" }, "description": "Label ids (entityType PITCH)." },
+          "links": { "type": "array", "items": { "type": "string" } },
+          "offices": { "type": "array", "items": { "type": "string" } },
+          "responsibleUsers": { "type": "array", "items": { "type": "string" } },
+          "createdByUserId": { "type": "string" },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string", "enum": ["clients", "description", "general", "practices", "publications", "specialists", "testimonials", "work_highlights", "industries", "title", "featured_specialist", "featured_practice", "featured_industry", "contact", "image"] },
+                "subType": { "type": "string" },
+                "title": { "type": "string" },
+                "sequence": { "type": "number", "minimum": 0 },
+                "content": { "type": "object", "description": "Inline Tiptap-shaped JSON document.", "additionalProperties": true },
+                "settings": { "type": "object", "additionalProperties": true },
+                "specialists": { "type": "array", "items": { "type": "object", "properties": { "specialistId": { "type": "string" }, "role": { "type": "string", "enum": ["lead", "supporting"] }, "sequence": { "type": "number", "minimum": 0 }, "bioContentId": { "type": "string" }, "bio": { "type": "object", "additionalProperties": true } }, "required": ["specialistId", "role"] } },
+                "practices": { "type": "array", "items": { "type": "object", "properties": { "practiceId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "descriptionId": { "type": "string" }, "description": { "type": "object", "additionalProperties": true } }, "required": ["practiceId"] } },
+                "industries": { "type": "array", "items": { "type": "object", "properties": { "industryId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "descriptionId": { "type": "string" }, "description": { "type": "object", "additionalProperties": true } }, "required": ["industryId"] } },
+                "workHighlights": { "type": "array", "items": { "type": "object", "properties": { "workHighlightId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "showClientLogo": { "type": "boolean" }, "showIndustries": { "type": "boolean" }, "showPractices": { "type": "boolean" }, "viewAsTombstone": { "type": "boolean" } }, "required": ["workHighlightId"] } },
+                "clientTombstones": { "type": "array", "items": { "type": "object", "properties": { "firmRelationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["firmRelationId"] } },
+                "testimonials": { "type": "array", "items": { "type": "object", "properties": { "testimonialId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["testimonialId"] } },
+                "publications": { "type": "array", "items": { "type": "object", "properties": { "publicationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["publicationId"] } },
+                "images": { "type": "array", "items": { "type": "object", "properties": { "fileId": { "type": "string" } }, "required": ["fileId"] } }
+              },
+              "required": ["type"]
+            }
+          }
+        },
+        "required": ["title", "language"]
+      }
+    },
+    {
+      "name": "presentations_update",
+      "description": "Update a presentation (PATCH). Chapters with an id are updated or kept; chapters without an id are created. Present the result by title, never by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "language": { "type": "string" },
+          "clientId": { "type": "string" },
+          "status": { "type": "string", "enum": ["CLOSING", "DRAFT", "REVIEW", "SENT", "CLOSED_WON", "CLOSED_LOST", "TRASH"] },
+          "deadline": { "type": "string" },
+          "presentationRequirements": { "type": "string" },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "description": "Present = update/keep this chapter; absent = create." },
+                "type": { "type": "string", "enum": ["clients", "description", "general", "practices", "publications", "specialists", "testimonials", "work_highlights", "industries", "title", "featured_specialist", "featured_practice", "featured_industry", "contact", "image"] },
+                "subType": { "type": "string" },
+                "title": { "type": "string" },
+                "sequence": { "type": "number", "minimum": 0 },
+                "content": { "type": "object", "additionalProperties": true },
+                "specialists": { "type": "array", "items": { "type": "object", "properties": { "specialistId": { "type": "string" }, "role": { "type": "string", "enum": ["lead", "supporting"] }, "sequence": { "type": "number", "minimum": 0 }, "bioContentId": { "type": "string" }, "bio": { "type": "object", "additionalProperties": true } }, "required": ["specialistId", "role"] } },
+                "practices": { "type": "array", "items": { "type": "object", "properties": { "practiceId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["practiceId"] } },
+                "industries": { "type": "array", "items": { "type": "object", "properties": { "industryId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["industryId"] } },
+                "workHighlights": { "type": "array", "items": { "type": "object", "properties": { "workHighlightId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["workHighlightId"] } },
+                "clientTombstones": { "type": "array", "items": { "type": "object", "properties": { "firmRelationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["firmRelationId"] } }
+              },
+              "required": ["type"]
+            }
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "export_presentation",
+      "description": "Render a presentation to PowerPoint or Word through one of the firm's export templates and return a time-limited download link (15 minutes). The file is also stored on the presentation in KLERQ. Call without template to list the templates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "presentationId": { "type": "string", "minLength": 1, "description": "The presentation (pitch) to export." },
+          "template": { "type": "string", "minLength": 1, "description": "Key of one of the firm's export templates (e.g. default_pptx). Omit to list the templates." }
+        },
+        "required": ["presentationId"]
+      }
+    },
+    {
+      "name": "find_work_highlights",
+      "description": "Search a matter's work highlights (work highlights are matter-scoped). Filters: status, bySpecialist (by name or id), confidentialOnly, notUsedInSubmissions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "matterId": { "type": "string", "description": "The matter whose work highlights to search (required)." },
+          "status": { "type": "string", "enum": ["APPROVED", "DRAFT"] },
+          "bySpecialist": { "type": "string", "description": "Only highlights featuring this specialist, by name." },
+          "bySpecialistId": { "type": "string" },
+          "confidentialOnly": { "type": "boolean" },
+          "notUsedInSubmissions": { "type": "boolean" },
+          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+        },
+        "required": ["matterId"]
+      }
+    },
+    {
+      "name": "work_highlights_get",
+      "description": "Get a work highlight of a matter.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "matterId": { "type": "string", "minLength": 1 }, "id": { "type": "string", "minLength": 1 } },
+        "required": ["matterId", "id"]
+      }
+    },
+    {
+      "name": "matters_get",
+      "description": "Get a matter.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "id": { "type": "string", "minLength": 1 } },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "clients_get",
+      "description": "Get a client.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "id": { "type": "string", "minLength": 1 } },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "search",
+      "description": "Semantic search across the workspace (matters, clients, contacts, presentations, submissions, work highlights, directories, labels). Recall is best-effort; an empty result does not mean a record does not exist. Confidential records are excluded.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "minLength": 1, "description": "Natural-language search over the workspace." },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 25, "description": "Max results (default 10)." }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "find_experience",
+      "description": "Find relevant firm experience and precedents (matters and work highlights) by semantic search from a text query and/or a reference matter (similarToMatterId), with optional filters createdAfter/Before and forClient (by name). Confidential records are excluded.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "minLength": 1, "description": "Describe the experience to find: practice area, sector, deal type, size, geography." },
+          "similarToMatterId": { "type": "string" },
+          "forClient": { "type": "string", "description": "Keep only matter hits involving this client, by name." },
+          "createdAfter": { "type": "string" },
+          "createdBefore": { "type": "string" },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 25 }
+        }
+      }
+    }
+  ]
+}
