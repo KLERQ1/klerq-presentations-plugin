@@ -15,7 +15,7 @@ Files go at the ZIP ROOT (no folder inside), as the admin center expects.
 """
 import argparse, json, pathlib, re, sys, uuid, zipfile
 from PIL import Image
-from tenant import mcp_url, mcp_host, out_name
+from tenant import mcp_url, mcp_host, out_name, UNIVERSAL
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "m365"
@@ -25,7 +25,10 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--auth-ref", help="OAuthPluginVault reference_id (auth config id) for the KLERQ MCP server")
 ap.add_argument("--app-id", help="App id GUID for manifest.json")
 ap.add_argument("--tenant", help="Workspace label: the package points at <tenant>.mcp.klerq.app (default: klerq)")
+ap.add_argument("--universal", action="store_true", help="Point at the universal address mcp.klerq.app (once the server supports it)")
 args = ap.parse_args()
+if args.universal:
+    args.tenant = "universal"
 TENANT = args.tenant or "klerq"
 OUT = ROOT.parent / out_name("klerq-deck-builder-m365", args.tenant)
 
@@ -43,8 +46,9 @@ if errors:
 # --- workspace ---
 klerq["runtimes"][0]["spec"]["url"] = mcp_url(TENANT)
 manifest["validDomains"] = [mcp_host(TENANT)]
-if args.tenant:
+if args.tenant and args.tenant != UNIVERSAL:
     # Stable per-tenant app id, so two customers' packages are distinct apps.
+    # The universal package keeps the manifest's own id: it is the one AppSource listing.
     manifest["id"] = str(uuid.uuid5(uuid.NAMESPACE_DNS, mcp_host(TENANT)))
 
 # --- overrides ---

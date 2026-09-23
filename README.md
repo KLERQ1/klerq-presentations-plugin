@@ -94,6 +94,10 @@ python scripts/build-chatgpt-zip.py --tenant acme
 python scripts/build-m365-zip.py    --tenant acme --auth-ref <that customer's auth config id>
 ```
 
+Once the server accepts the universal address `mcp.klerq.app` (one listing for every
+workspace, see the team plan), build with `--universal` instead of `--tenant`: the packages
+then point at that address and the Copilot package keeps its fixed app id for AppSource.
+
 ## ChatGPT package
 
 ChatGPT validates more than the portable format: it wants an `extensions.com.openai.interface`
