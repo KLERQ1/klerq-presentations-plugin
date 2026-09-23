@@ -56,7 +56,7 @@ Any Node 20+ host works (Railway, Render, Fly.io, a VM, Azure App Service). Dock
 
 ```bash
 docker build -f mcp-app/Dockerfile -t klerq-form .      # from the repo root
-docker run -p 3033:3033 -e ALLOWED_HOSTS=form.mcp.klerq.app klerq-form
+docker run -p 3033:3033 -e ALLOWED_HOSTS=klerq-presentations-plugin.onrender.com klerq-form
 ```
 
 Environment variables:
@@ -65,7 +65,7 @@ Environment variables:
 |---|---|---|
 | `PORT` | `3033` | Listen port. Setting it also switches `HOST` to `0.0.0.0`. |
 | `HOST` | `127.0.0.1` (or `0.0.0.0` when `PORT` is set) | Bind address. |
-| `ALLOWED_HOSTS` | none | Comma-separated public hostnames, e.g. `form.mcp.klerq.app`. Turns on Host-header validation. Set it in production. |
+| `ALLOWED_HOSTS` | none | Comma-separated public hostnames, e.g. `klerq-presentations-plugin.onrender.com`. Turns on Host-header validation. Set it in production. |
 | `STATELESS` | off | One server per request instead of MCP sessions. Use only behind a load balancer without sticky sessions; capability detection then relies on the host sending its capabilities per request. |
 | `SESSION_TTL_MS` | 30 min | Idle time after which a session is dropped. |
 
@@ -73,10 +73,10 @@ Put it behind HTTPS (the hosts require it) and add the URL to the plugin's MCP c
 
 ```jsonc
 // .mcp.json (Claude) — add next to "klerq"
-"klerq-form": { "type": "http", "url": "https://form.mcp.klerq.app/mcp" }
+"klerq-form": { "type": "http", "url": "https://klerq-presentations-plugin.onrender.com/mcp" }
 
 // mcp.json (Agent Plugins, other clients)
-"klerq-form": { "type": "streamable-http", "url": "https://form.mcp.klerq.app/mcp" }
+"klerq-form": { "type": "streamable-http", "url": "https://klerq-presentations-plugin.onrender.com/mcp" }
 ```
 
 No authentication is needed: the server has nothing to protect. If you want to restrict

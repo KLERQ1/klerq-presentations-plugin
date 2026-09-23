@@ -3,6 +3,10 @@
     "klerq": {
       "type": "http",
       "url": "https://klerq.mcp.klerq.app/mcp"
+    },
+    "klerq-form": {
+      "type": "http",
+      "url": "https://klerq-presentations-plugin.onrender.com/mcp"
     }
   }
 }

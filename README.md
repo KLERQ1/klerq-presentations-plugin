@@ -79,13 +79,13 @@ credentials. Deploy it (see `mcp-app/README.md`) and add it next to the KLERQ se
 
 ```jsonc
 // .mcp.json (Claude)
-"klerq-form": { "type": "http", "url": "https://form.mcp.klerq.app/mcp" }
+"klerq-form": { "type": "http", "url": "https://klerq-presentations-plugin.onrender.com/mcp" }
 // mcp.json (other clients)
-"klerq-form": { "type": "streamable-http", "url": "https://form.mcp.klerq.app/mcp" }
+"klerq-form": { "type": "streamable-http", "url": "https://klerq-presentations-plugin.onrender.com/mcp" }
 ```
 
-Until it is deployed, Claude.ai keeps using the widget form and every other client uses
-plain chat mode. The two tools can also be merged into the KLERQ MCP server itself later;
+It is deployed on Render at that address and already listed in both configs. If it is
+removed, Claude.ai falls back to the widget form and every other client to plain chat mode. The two tools can also be merged into the KLERQ MCP server itself later;
 the skill only looks for the tool names.
 
 Clients may implement the standard partially — one component type, or only some MCP
