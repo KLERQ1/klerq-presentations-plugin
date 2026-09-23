@@ -6,13 +6,34 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "name": { "type": "string", "description": "Substring to match in the client name." },
-          "clientTypes": { "type": "string", "description": "Comma-separated client classifications to match." },
-          "includeArchived": { "type": "boolean" },
-          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 },
-          "pitchedNotSubmittedSince": { "type": "string", "description": "Clients we made a presentation for on/after this ISO date but have not submitted for in the same window." },
-          "inSubmissionsSince": { "type": "string", "description": "Only clients referenced by a submission created on/after this ISO date." },
-          "withMattersSince": { "type": "string", "description": "Only clients with a matter created on/after this ISO date." }
+          "name": {
+            "type": "string",
+            "description": "Substring to match in the client name."
+          },
+          "clientTypes": {
+            "type": "string",
+            "description": "Comma-separated client classifications to match."
+          },
+          "includeArchived": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 200
+          },
+          "pitchedNotSubmittedSince": {
+            "type": "string",
+            "description": "Clients we made a presentation for on/after this ISO date but have not submitted for in the same window."
+          },
+          "inSubmissionsSince": {
+            "type": "string",
+            "description": "Only clients referenced by a submission created on/after this ISO date."
+          },
+          "withMattersSince": {
+            "type": "string",
+            "description": "Only clients with a matter created on/after this ISO date."
+          }
         }
       }
     },
@@ -22,19 +43,54 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": { "type": "string", "description": "Substring to match in the presentation title." },
-          "status": { "type": "string", "description": "Comma-separated statuses. Allowed: CLOSING, DRAFT, REVIEW, SENT, CLOSED_WON, CLOSED_LOST, TRASH." },
-          "language": { "type": "string", "description": "Match a language tag exactly." },
-          "forClient": { "type": "string", "description": "Only presentations for this client, by name." },
-          "forClientId": { "type": "string", "description": "Only presentations for this client id." },
-          "involvingSpecialist": { "type": "string", "description": "Only presentations whose chapters reference this specialist, by name." },
-          "involvingSpecialistId": { "type": "string" },
-          "usingWorkHighlightId": { "type": "string" },
-          "createdAfter": { "type": "string", "description": "Created on/after this ISO date." },
-          "createdBefore": { "type": "string" },
-          "deadlineAfter": { "type": "string" },
-          "deadlineBefore": { "type": "string" },
-          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+          "query": {
+            "type": "string",
+            "description": "Substring to match in the presentation title."
+          },
+          "status": {
+            "type": "string",
+            "description": "Comma-separated statuses. Allowed: CLOSING, DRAFT, REVIEW, SENT, CLOSED_WON, CLOSED_LOST, TRASH."
+          },
+          "language": {
+            "type": "string",
+            "description": "Match a language tag exactly."
+          },
+          "forClient": {
+            "type": "string",
+            "description": "Only presentations for this client, by name."
+          },
+          "forClientId": {
+            "type": "string",
+            "description": "Only presentations for this client id."
+          },
+          "involvingSpecialist": {
+            "type": "string",
+            "description": "Only presentations whose chapters reference this specialist, by name."
+          },
+          "involvingSpecialistId": {
+            "type": "string"
+          },
+          "usingWorkHighlightId": {
+            "type": "string"
+          },
+          "createdAfter": {
+            "type": "string",
+            "description": "Created on/after this ISO date."
+          },
+          "createdBefore": {
+            "type": "string"
+          },
+          "deadlineAfter": {
+            "type": "string"
+          },
+          "deadlineBefore": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 200
+          }
         }
       }
     },
@@ -44,15 +100,43 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "name": { "type": "string", "description": "Substring to match in the specialist's given/family name." },
-          "roleId": { "type": "string" },
-          "officeId": { "type": "string" },
-          "includeArchived": { "type": "boolean", "description": "Include archived specialists (default: active only)." },
-          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200, "description": "Max specialists to return (default 50)." },
-          "usedSince": { "type": "string", "description": "Only specialists referenced by a submission or presentation created on/after this ISO date." },
-          "usedUntil": { "type": "string" },
-          "submissionDirectoryId": { "type": "string" },
-          "dateField": { "type": "string", "enum": ["created", "deadline"] }
+          "name": {
+            "type": "string",
+            "description": "Substring to match in the specialist's given/family name."
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "officeId": {
+            "type": "string"
+          },
+          "includeArchived": {
+            "type": "boolean",
+            "description": "Include archived specialists (default: active only)."
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 200,
+            "description": "Max specialists to return (default 50)."
+          },
+          "usedSince": {
+            "type": "string",
+            "description": "Only specialists referenced by a submission or presentation created on/after this ISO date."
+          },
+          "usedUntil": {
+            "type": "string"
+          },
+          "submissionDirectoryId": {
+            "type": "string"
+          },
+          "dateField": {
+            "type": "string",
+            "enum": [
+              "created",
+              "deadline"
+            ]
+          }
         }
       }
     },
@@ -62,18 +146,47 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": { "type": "string", "description": "Substring to match in the internal matter name." },
-          "status": { "type": "string", "description": "Comma-separated statuses. Allowed: ONGOING, COMPLETED." },
-          "forClient": { "type": "string", "description": "Only matters involving this client, by name." },
-          "forClientId": { "type": "string" },
-          "withResponsibleUserId": { "type": "string" },
-          "includeArchived": { "type": "boolean" },
-          "createdAfter": { "type": "string" },
-          "createdBefore": { "type": "string" },
-          "updatedAfter": { "type": "string" },
-          "endDateAfter": { "type": "string" },
-          "endDateBefore": { "type": "string" },
-          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+          "query": {
+            "type": "string",
+            "description": "Substring to match in the internal matter name."
+          },
+          "status": {
+            "type": "string",
+            "description": "Comma-separated statuses. Allowed: ONGOING, COMPLETED."
+          },
+          "forClient": {
+            "type": "string",
+            "description": "Only matters involving this client, by name."
+          },
+          "forClientId": {
+            "type": "string"
+          },
+          "withResponsibleUserId": {
+            "type": "string"
+          },
+          "includeArchived": {
+            "type": "boolean"
+          },
+          "createdAfter": {
+            "type": "string"
+          },
+          "createdBefore": {
+            "type": "string"
+          },
+          "updatedAfter": {
+            "type": "string"
+          },
+          "endDateAfter": {
+            "type": "string"
+          },
+          "endDateBefore": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 200
+          }
         }
       }
     },
@@ -82,8 +195,15 @@
       "description": "Get a specialist with role, practices, industries and bio versions. Present the record by name, never by id.",
       "inputSchema": {
         "type": "object",
-        "properties": { "id": { "type": "string", "minLength": 1 } },
-        "required": ["id"]
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -91,8 +211,16 @@
       "description": "Composite read of a matter and its work highlights in one call. Present records by name or title, never by id.",
       "inputSchema": {
         "type": "object",
-        "properties": { "matterId": { "type": "string", "minLength": 1, "description": "The id of the matter to summarize." } },
-        "required": ["matterId"]
+        "properties": {
+          "matterId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The id of the matter to summarize."
+          }
+        },
+        "required": [
+          "matterId"
+        ]
       }
     },
     {
@@ -100,8 +228,15 @@
       "description": "Get a presentation with its chapters and content. Present the record by title, never by id.",
       "inputSchema": {
         "type": "object",
-        "properties": { "id": { "type": "string", "minLength": 1 } },
-        "required": ["id"]
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -110,46 +245,316 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "title": { "type": "string" },
-          "language": { "type": "string", "description": "ISO 639-2 three-letter code (e.g. eng, nld, deu, fra)." },
-          "clientId": { "type": "string" },
-          "status": { "type": "string", "enum": ["CLOSING", "DRAFT", "REVIEW", "SENT", "CLOSED_WON", "CLOSED_LOST", "TRASH"] },
-          "deadline": { "type": "string" },
-          "presentationRequirements": { "type": "string" },
-          "estimatedValue": { "type": "number" },
-          "successRate": { "type": "number", "minimum": 0, "maximum": 100 },
-          "source": { "type": "string" },
-          "contacts": { "type": "array", "items": { "type": "string" }, "description": "FirmRelation ids (contacts)." },
-          "labels": { "type": "array", "items": { "type": "string" }, "description": "Label ids (entityType PITCH)." },
-          "links": { "type": "array", "items": { "type": "string" } },
-          "offices": { "type": "array", "items": { "type": "string" } },
-          "responsibleUsers": { "type": "array", "items": { "type": "string" } },
-          "createdByUserId": { "type": "string" },
+          "title": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "description": "ISO 639-2 three-letter code (e.g. eng, nld, deu, fra)."
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CLOSING",
+              "DRAFT",
+              "REVIEW",
+              "SENT",
+              "CLOSED_WON",
+              "CLOSED_LOST",
+              "TRASH"
+            ]
+          },
+          "deadline": {
+            "type": "string"
+          },
+          "presentationRequirements": {
+            "type": "string"
+          },
+          "estimatedValue": {
+            "type": "number"
+          },
+          "successRate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "source": {
+            "type": "string"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "FirmRelation ids (contacts)."
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Label ids (entityType PITCH)."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "offices": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "responsibleUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdByUserId": {
+            "type": "string"
+          },
           "chapters": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "type": { "type": "string", "enum": ["clients", "description", "general", "practices", "publications", "specialists", "testimonials", "work_highlights", "industries", "title", "featured_specialist", "featured_practice", "featured_industry", "contact", "image"] },
-                "subType": { "type": "string" },
-                "title": { "type": "string" },
-                "sequence": { "type": "number", "minimum": 0 },
-                "content": { "type": "object", "description": "Inline Tiptap-shaped JSON document.", "additionalProperties": true },
-                "settings": { "type": "object", "additionalProperties": true },
-                "specialists": { "type": "array", "items": { "type": "object", "properties": { "specialistId": { "type": "string" }, "role": { "type": "string", "enum": ["lead", "supporting"] }, "sequence": { "type": "number", "minimum": 0 }, "bioContentId": { "type": "string" }, "bio": { "type": "object", "additionalProperties": true } }, "required": ["specialistId", "role"] } },
-                "practices": { "type": "array", "items": { "type": "object", "properties": { "practiceId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "descriptionId": { "type": "string" }, "description": { "type": "object", "additionalProperties": true } }, "required": ["practiceId"] } },
-                "industries": { "type": "array", "items": { "type": "object", "properties": { "industryId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "descriptionId": { "type": "string" }, "description": { "type": "object", "additionalProperties": true } }, "required": ["industryId"] } },
-                "workHighlights": { "type": "array", "items": { "type": "object", "properties": { "workHighlightId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 }, "showClientLogo": { "type": "boolean" }, "showIndustries": { "type": "boolean" }, "showPractices": { "type": "boolean" }, "viewAsTombstone": { "type": "boolean" } }, "required": ["workHighlightId"] } },
-                "clientTombstones": { "type": "array", "items": { "type": "object", "properties": { "firmRelationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["firmRelationId"] } },
-                "testimonials": { "type": "array", "items": { "type": "object", "properties": { "testimonialId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["testimonialId"] } },
-                "publications": { "type": "array", "items": { "type": "object", "properties": { "publicationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["publicationId"] } },
-                "images": { "type": "array", "items": { "type": "object", "properties": { "fileId": { "type": "string" } }, "required": ["fileId"] } }
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "clients",
+                    "description",
+                    "general",
+                    "practices",
+                    "publications",
+                    "specialists",
+                    "testimonials",
+                    "work_highlights",
+                    "industries",
+                    "title",
+                    "featured_specialist",
+                    "featured_practice",
+                    "featured_industry",
+                    "contact",
+                    "image"
+                  ]
+                },
+                "subType": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "sequence": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "content": {
+                  "type": "object",
+                  "description": "Inline Tiptap-shaped JSON document.",
+                  "additionalProperties": true
+                },
+                "settings": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "specialists": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "specialistId": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "lead",
+                          "supporting"
+                        ]
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "bioContentId": {
+                        "type": "string"
+                      },
+                      "bio": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    },
+                    "required": [
+                      "specialistId",
+                      "role"
+                    ]
+                  }
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "practiceId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "descriptionId": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    },
+                    "required": [
+                      "practiceId"
+                    ]
+                  }
+                },
+                "industries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "industryId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "descriptionId": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    },
+                    "required": [
+                      "industryId"
+                    ]
+                  }
+                },
+                "workHighlights": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "workHighlightId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "showClientLogo": {
+                        "type": "boolean"
+                      },
+                      "showIndustries": {
+                        "type": "boolean"
+                      },
+                      "showPractices": {
+                        "type": "boolean"
+                      },
+                      "viewAsTombstone": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "workHighlightId"
+                    ]
+                  }
+                },
+                "clientTombstones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "firmRelationId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "firmRelationId"
+                    ]
+                  }
+                },
+                "testimonials": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "testimonialId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "testimonialId"
+                    ]
+                  }
+                },
+                "publications": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "publicationId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "publicationId"
+                    ]
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "fileId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "fileId"
+                    ]
+                  }
+                }
               },
-              "required": ["type"]
+              "required": [
+                "type"
+              ]
             }
           }
         },
-        "required": ["title", "language"]
+        "required": [
+          "title",
+          "language"
+        ]
       }
     },
     {
@@ -158,35 +563,195 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "title": { "type": "string" },
-          "language": { "type": "string" },
-          "clientId": { "type": "string" },
-          "status": { "type": "string", "enum": ["CLOSING", "DRAFT", "REVIEW", "SENT", "CLOSED_WON", "CLOSED_LOST", "TRASH"] },
-          "deadline": { "type": "string" },
-          "presentationRequirements": { "type": "string" },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CLOSING",
+              "DRAFT",
+              "REVIEW",
+              "SENT",
+              "CLOSED_WON",
+              "CLOSED_LOST",
+              "TRASH"
+            ]
+          },
+          "deadline": {
+            "type": "string"
+          },
+          "presentationRequirements": {
+            "type": "string"
+          },
           "chapters": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "id": { "type": "string", "description": "Present = update/keep this chapter; absent = create." },
-                "type": { "type": "string", "enum": ["clients", "description", "general", "practices", "publications", "specialists", "testimonials", "work_highlights", "industries", "title", "featured_specialist", "featured_practice", "featured_industry", "contact", "image"] },
-                "subType": { "type": "string" },
-                "title": { "type": "string" },
-                "sequence": { "type": "number", "minimum": 0 },
-                "content": { "type": "object", "additionalProperties": true },
-                "specialists": { "type": "array", "items": { "type": "object", "properties": { "specialistId": { "type": "string" }, "role": { "type": "string", "enum": ["lead", "supporting"] }, "sequence": { "type": "number", "minimum": 0 }, "bioContentId": { "type": "string" }, "bio": { "type": "object", "additionalProperties": true } }, "required": ["specialistId", "role"] } },
-                "practices": { "type": "array", "items": { "type": "object", "properties": { "practiceId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["practiceId"] } },
-                "industries": { "type": "array", "items": { "type": "object", "properties": { "industryId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["industryId"] } },
-                "workHighlights": { "type": "array", "items": { "type": "object", "properties": { "workHighlightId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["workHighlightId"] } },
-                "clientTombstones": { "type": "array", "items": { "type": "object", "properties": { "firmRelationId": { "type": "string" }, "sequence": { "type": "number", "minimum": 0 } }, "required": ["firmRelationId"] } }
+                "id": {
+                  "type": "string",
+                  "description": "Present = update/keep this chapter; absent = create."
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "clients",
+                    "description",
+                    "general",
+                    "practices",
+                    "publications",
+                    "specialists",
+                    "testimonials",
+                    "work_highlights",
+                    "industries",
+                    "title",
+                    "featured_specialist",
+                    "featured_practice",
+                    "featured_industry",
+                    "contact",
+                    "image"
+                  ]
+                },
+                "subType": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "sequence": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "content": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "specialists": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "specialistId": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "lead",
+                          "supporting"
+                        ]
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "bioContentId": {
+                        "type": "string"
+                      },
+                      "bio": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    },
+                    "required": [
+                      "specialistId",
+                      "role"
+                    ]
+                  }
+                },
+                "practices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "practiceId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "practiceId"
+                    ]
+                  }
+                },
+                "industries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "industryId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "industryId"
+                    ]
+                  }
+                },
+                "workHighlights": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "workHighlightId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "workHighlightId"
+                    ]
+                  }
+                },
+                "clientTombstones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "firmRelationId": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "firmRelationId"
+                    ]
+                  }
+                }
               },
-              "required": ["type"]
+              "required": [
+                "type"
+              ]
             }
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -195,10 +760,20 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "presentationId": { "type": "string", "minLength": 1, "description": "The presentation (pitch) to export." },
-          "template": { "type": "string", "minLength": 1, "description": "Key of one of the firm's export templates (e.g. default_pptx). Omit to list the templates." }
+          "presentationId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The presentation (pitch) to export."
+          },
+          "template": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Key of one of the firm's export templates (e.g. default_pptx). Omit to list the templates."
+          }
         },
-        "required": ["presentationId"]
+        "required": [
+          "presentationId"
+        ]
       }
     },
     {
@@ -207,15 +782,39 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "matterId": { "type": "string", "description": "The matter whose work highlights to search (required)." },
-          "status": { "type": "string", "enum": ["APPROVED", "DRAFT"] },
-          "bySpecialist": { "type": "string", "description": "Only highlights featuring this specialist, by name." },
-          "bySpecialistId": { "type": "string" },
-          "confidentialOnly": { "type": "boolean" },
-          "notUsedInSubmissions": { "type": "boolean" },
-          "limit": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 }
+          "matterId": {
+            "type": "string",
+            "description": "The matter whose work highlights to search (required)."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "APPROVED",
+              "DRAFT"
+            ]
+          },
+          "bySpecialist": {
+            "type": "string",
+            "description": "Only highlights featuring this specialist, by name."
+          },
+          "bySpecialistId": {
+            "type": "string"
+          },
+          "confidentialOnly": {
+            "type": "boolean"
+          },
+          "notUsedInSubmissions": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 200
+          }
         },
-        "required": ["matterId"]
+        "required": [
+          "matterId"
+        ]
       }
     },
     {
@@ -223,8 +822,20 @@
       "description": "Get a work highlight of a matter.",
       "inputSchema": {
         "type": "object",
-        "properties": { "matterId": { "type": "string", "minLength": 1 }, "id": { "type": "string", "minLength": 1 } },
-        "required": ["matterId", "id"]
+        "properties": {
+          "matterId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "matterId",
+          "id"
+        ]
       }
     },
     {
@@ -232,8 +843,15 @@
       "description": "Get a matter.",
       "inputSchema": {
         "type": "object",
-        "properties": { "id": { "type": "string", "minLength": 1 } },
-        "required": ["id"]
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -241,8 +859,15 @@
       "description": "Get a client.",
       "inputSchema": {
         "type": "object",
-        "properties": { "id": { "type": "string", "minLength": 1 } },
-        "required": ["id"]
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     {
@@ -251,10 +876,21 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": { "type": "string", "minLength": 1, "description": "Natural-language search over the workspace." },
-          "limit": { "type": "integer", "minimum": 1, "maximum": 25, "description": "Max results (default 10)." }
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Natural-language search over the workspace."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Max results (default 10)."
+          }
         },
-        "required": ["query"]
+        "required": [
+          "query"
+        ]
       }
     },
     {
@@ -263,13 +899,80 @@
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": { "type": "string", "minLength": 1, "description": "Describe the experience to find: practice area, sector, deal type, size, geography." },
-          "similarToMatterId": { "type": "string" },
-          "forClient": { "type": "string", "description": "Keep only matter hits involving this client, by name." },
-          "createdAfter": { "type": "string" },
-          "createdBefore": { "type": "string" },
-          "limit": { "type": "integer", "minimum": 1, "maximum": 25 }
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Describe the experience to find: practice area, sector, deal type, size, geography."
+          },
+          "similarToMatterId": {
+            "type": "string"
+          },
+          "forClient": {
+            "type": "string",
+            "description": "Keep only matter hits involving this client, by name."
+          },
+          "createdAfter": {
+            "type": "string"
+          },
+          "createdBefore": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          }
         }
+      }
+    },
+    {
+      "name": "presentation_brief",
+      "description": "Step 1 of building a new presentation. Shows the brief box inline; call it first, before loading any KLERQ data. The brief comes back as a chat message starting with \"[Presentation form] Brief\".",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "brief": {
+            "type": "string",
+            "description": "Optional text to prefill the brief box with. Leave empty to show the example story."
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "resourceUri": "ui://klerq/brief.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "ui/resourceUri": "ui://klerq/brief.html"
+      }
+    },
+    {
+      "name": "presentation_form",
+      "description": "Step 2 of building a new presentation. Renders the chapter-by-chapter form inline, prefilled from the brief; pass the form data (names only, never ids) as data. The approved choices come back as a chat message starting with \"[Presentation form] Approve\".",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "The form data block: general, clients, texts, textRecs, specialists, industries, highlights, chapters, ai, aiFields, aiDrafts, bioDrafts, pricing, textIns, brief, phase.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "_meta": {
+        "ui": {
+          "resourceUri": "ui://klerq/form.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "ui/resourceUri": "ui://klerq/form.html"
       }
     }
   ]

@@ -4,7 +4,7 @@
   "name_for_human": "KLERQ",
   "namespace": "klerq",
   "description_for_human": "The firm's KLERQ knowledge base: matters, work highlights, specialists, clients and presentations",
-  "description_for_model": "KLERQ is the firm's knowledge base of matters, clients, contacts, specialists, work highlights, submissions and presentations (pitches). Use it to load the content for a pitch, to create the presentation record and to export it to PowerPoint. Record ids in results are handles for follow-up calls only; present every record to the user by name or title, never by id. Prefer the find_* and *_overview tools for questions; use *_get for one record and create/update only for changes the user asked for.",
+  "description_for_model": "KLERQ is the firm's knowledge base of matters, clients, contacts, specialists, work highlights, submissions and presentations (pitches). Use it to load the content for a pitch, to create the presentation record and to export it to PowerPoint. Record ids in results are handles for follow-up calls only; present every record to the user by name or title, never by id. Prefer the find_* and *_overview tools for questions; use *_get for one record and create/update only for changes the user asked for. To build a new presentation, call presentation_brief first, load the content with the read tools, then presentation_form with that content as data; both render an inline form where the client supports it.",
   "contact_email": "accounts@klerq.io",
   "privacy_policy_url": "https://klerq.io/privacy",
   "legal_info_url": "https://klerq.io/terms",
@@ -195,6 +195,28 @@
           ]
         }
       }
+    },
+    {
+      "name": "presentation_brief",
+      "description": "Step 1 of building a new presentation. Shows the brief box inline; call it first, before loading any KLERQ data. The brief comes back as a chat message starting with \"[Presentation form] Brief\".",
+      "capabilities": {
+        "security_info": {
+          "data_handling": [
+            "DataTransform"
+          ]
+        }
+      }
+    },
+    {
+      "name": "presentation_form",
+      "description": "Step 2 of building a new presentation. Renders the chapter-by-chapter form inline, prefilled from the brief; pass the form data (names only, never ids) as data. The approved choices come back as a chat message starting with \"[Presentation form] Approve\".",
+      "capabilities": {
+        "security_info": {
+          "data_handling": [
+            "DataTransform"
+          ]
+        }
+      }
     }
   ],
   "runtimes": [
@@ -220,7 +242,9 @@
         "matters_get",
         "clients_get",
         "search",
-        "find_experience"
+        "find_experience",
+        "presentation_brief",
+        "presentation_form"
       ],
       "spec": {
         "url": "https://klerq.mcp.klerq.app/mcp",

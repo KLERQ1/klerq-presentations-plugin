@@ -31,7 +31,6 @@
     ]
   },
   "validDomains": [
-    "klerq.mcp.klerq.app",
-    "klerq-presentations-plugin.onrender.com"
+    "klerq.mcp.klerq.app"
   ]
 }

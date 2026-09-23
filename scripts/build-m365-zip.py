@@ -14,7 +14,7 @@ from PIL import Image
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "m365"
 OUT = ROOT.parent / "klerq-deck-builder-m365.zip"
-FILES = ["manifest.json", "declarativeAgent.json", "klerq-plugin.json", "klerq-tools.json", "klerq-form-plugin.json", "color.png", "outline.png"]
+FILES = ["manifest.json", "declarativeAgent.json", "klerq-plugin.json", "klerq-tools.json", "color.png", "outline.png"]
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--auth-ref", help="OAuthPluginVault reference_id (auth config id) for the KLERQ MCP server")
@@ -28,7 +28,7 @@ def load(name):
     except Exception as e:
         errors.append(f"{name}: invalid JSON ({e})"); return None
 
-manifest, agent, klerq, tools, form = (load(n) for n in FILES[:5])
+manifest, agent, klerq, tools = (load(n) for n in FILES[:4])
 if errors:
     sys.exit("\n".join(errors))
 
@@ -60,7 +60,7 @@ if len(agent.get("description", "")) > 1000: errors.append("declarativeAgent.jso
 if len(agent.get("conversation_starters", [])) > 12: errors.append("declarativeAgent.json: more than 12 conversation starters")
 for a in agent.get("actions", []):
     if not (SRC / a["file"]).exists(): errors.append(f"declarativeAgent.json: action file {a['file']} missing")
-for name, pl in (("klerq-plugin.json", klerq), ("klerq-form-plugin.json", form)):
+for name, pl in (("klerq-plugin.json", klerq),):
     if pl.get("schema_version") != "v2.4": errors.append(f"{name}: schema_version must be v2.4")
     if not re.fullmatch(r"[A-Za-z0-9]+", pl.get("namespace", "")): errors.append(f"{name}: namespace must match ^[A-Za-z0-9]+$")
     if len(pl.get("name_for_human", "")) > 20: warnings.append(f"{name}: name_for_human beyond 20 characters may be truncated")
@@ -100,7 +100,7 @@ if OUT.exists(): OUT.unlink()
 with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
     z.writestr("manifest.json", json.dumps(manifest, indent=2) + "\n")
     z.writestr("klerq-plugin.json", json.dumps(klerq, indent=2) + "\n")
-    for f in ("declarativeAgent.json", "klerq-tools.json", "klerq-form-plugin.json", "color.png", "outline.png"):
+    for f in ("declarativeAgent.json", "klerq-tools.json", "color.png", "outline.png"):
         z.write(SRC / f, f)
     names = z.namelist()
 print(f"wrote {OUT} ({OUT.stat().st_size} bytes)")

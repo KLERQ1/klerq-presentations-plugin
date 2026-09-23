@@ -1,7 +1,7 @@
 import json, os, sys
 from jsonschema import Draft7Validator, Draft202012Validator
 S = os.path.join(os.environ["TEMP"], "m365schemas")
-pairs = [("m365/manifest.json", "teams.json"), ("m365/declarativeAgent.json", "da.json"), ("m365/klerq-plugin.json", "plugin.json"), ("m365/klerq-form-plugin.json", "plugin.json")]
+pairs = [("m365/manifest.json", "teams.json"), ("m365/declarativeAgent.json", "da.json"), ("m365/klerq-plugin.json", "plugin.json")]
 bad = 0
 for doc, sch in pairs:
     schema = json.load(open(os.path.join(S, sch), encoding="utf-8"))

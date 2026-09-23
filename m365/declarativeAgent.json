@@ -22,10 +22,6 @@
     {
       "id": "klerq",
       "file": "klerq-plugin.json"
-    },
-    {
-      "id": "klerqForm",
-      "file": "klerq-form-plugin.json"
     }
   ],
   "behavior_overrides": {
