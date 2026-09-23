@@ -68,6 +68,7 @@ Environment variables:
 | `ALLOWED_HOSTS` | none | Comma-separated public hostnames, e.g. `klerq-presentations-plugin.onrender.com`. Turns on Host-header validation. Set it in production. |
 | `STATELESS` | off | One server per request instead of MCP sessions. Use only behind a load balancer without sticky sessions; capability detection then relies on the host sending its capabilities per request. |
 | `SESSION_TTL_MS` | 30 min | Idle time after which a session is dropped. |
+| `STRICT_UI` | off | Refuse the form for clients that declare no MCP Apps capability. Off by default because some hosts (Microsoft 365 Copilot) render widgets without declaring it; they get the form plus a fallback hint instead. |
 
 Put it behind HTTPS (the hosts require it) and add the URL to the plugin's MCP config:
 
@@ -82,6 +83,12 @@ Put it behind HTTPS (the hosts require it) and add the URL to the plugin's MCP c
 No authentication is needed: the server has nothing to protect. If you want to restrict
 who can reach it, put it behind the same OAuth as the KLERQ server (`requireBearerAuth`
 from `@modelcontextprotocol/express`) or an allow-list on the reverse proxy.
+
+## Logs
+
+Each form tool call logs one JSON line with the client name, its declared capabilities and
+whether the server treated it as UI-capable. On Render these appear under Logs; use them to
+see how a new host identifies itself.
 
 ## Merging into the KLERQ MCP server
 

@@ -137,4 +137,14 @@ python scripts/build-m365-zip.py --auth-ref <auth config id>
 The auth config id comes from Microsoft 365 Agents Toolkit (choose dynamic client
 registration for the KLERQ server; it publishes a registration endpoint) or from the Teams
 developer portal (OAuth client registration). Upload the zip in the Microsoft 365 admin
-center under Integrated apps → Upload custom apps.
+center under Copilot → Agents & connectors → Upload custom agent.
+
+Two things to know before testing:
+
+- **A Microsoft 365 Copilot license (or pay-as-you-go billing) is required.** Without it the
+  account runs "M365 Copilot (Basic)": the agent loads and follows its instructions, but no
+  actions run, no sign-in to KLERQ appears and `-developer on` shows no debug card. That is
+  the text-only behaviour, not a packaging problem.
+- The form plugin uses dynamic tool discovery (`run_for_functions: ["*"]`), Microsoft's
+  default path, which renders MCP Apps widgets without extra configuration. The KLERQ plugin
+  pins its 16 tools in `klerq-tools.json` because it needs the OAuth auth config.
