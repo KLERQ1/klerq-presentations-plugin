@@ -101,3 +101,21 @@ top-level key invalidates the whole file.
 Note the filename collision: Claude's own format uses `.claude-plugin/plugin.json`, which is
 a different file with a different schema from the root `plugin.json`. Both are kept in sync
 by hand; change the name, version or description in both.
+
+## ChatGPT package
+
+ChatGPT validates more than the portable format: it wants an `extensions.com.openai.interface`
+block (display name, descriptions, category, square logo and icon) and, for the MCP servers,
+an `.app.json` that maps each server to the app you registered in ChatGPT developer mode.
+`scripts/build-chatgpt-zip.py` builds that package as `klerq-deck-builder-chatgpt.zip`
+next to the repo folder:
+
+```bash
+python scripts/build-chatgpt-zip.py                                   # skills + mcp.json, no app mapping
+python scripts/build-chatgpt-zip.py klerq=asdk_app_xxx klerq-form=asdk_app_yyy
+```
+
+To get the ids: ChatGPT → Settings → Security and login → Developer mode on; then
+chatgpt.com/plugins → plus → add each MCP server URL (KLERQ, then the form server); open the
+new app and copy the `plugin_asdk_app_…` id from the browser URL. The script strips the
+`plugin_` prefix.
