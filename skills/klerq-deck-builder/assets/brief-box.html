@@ -1,0 +1,34 @@
+<style>
+.kq{background:#1C2530!important;color:#FFFFFF!important;border-radius:12px;padding:1.5rem 1.75rem;color-scheme:dark}
+.kq *{color:inherit}
+.kq .eb{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#F4E6A1!important;margin:0 0 8px}
+.kq .bar{height:4px;background:#3A4552;border-radius:2px;margin:0 0 1.25rem}.kq .bar i{display:block;height:4px;width:8%;background:#5FB4BE;border-radius:2px}
+.kq h3{color:#FFFFFF!important;margin:0 0 4px}.kq .s{font-size:13px;color:#C9CFD6!important;margin:0 0 1rem}
+.kq textarea{width:100%;background:#26303C!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;caret-color:#FFFFFF!important;border:0.5px solid #4A5563!important;border-radius:var(--radius)!important;padding:10px 12px!important;font:inherit!important;font-size:14px!important;line-height:1.6!important;box-sizing:border-box!important;box-shadow:none!important}
+.kq textarea#br{background:#FFFFFF!important;color:#1C2530!important;-webkit-text-fill-color:#1C2530!important;caret-color:#1C2530!important;border:1px solid #5FB4BE!important;font-size:15px!important;line-height:1.7!important;min-height:190px!important;height:auto;resize:vertical;overflow:hidden!important;padding:12px 14px!important}
+.kq textarea#br::selection{background:#D7EEF0}
+.kq textarea::placeholder{color:#8792A0!important;-webkit-text-fill-color:#8792A0!important}
+.kq button{font:inherit!important;font-size:14px!important;border-radius:var(--radius)!important;padding:6px 14px!important;cursor:pointer;box-shadow:none!important}
+.kq button.mini{font-size:12px!important;padding:2px 8px!important;background:transparent!important;color:#F4E6A1!important;border:0.5px solid #8C845E!important}
+.kq button.go{background:#5FB4BE!important;color:#FFFFFF!important;border:0.5px solid #5FB4BE!important}
+.kq .meta{font-size:12px;color:#9AA5B1!important;margin:6px 0 0}.kq .err{font-size:13px;color:#F4A1A1!important;margin:8px 0 0}.kq .ok{font-size:13px;color:#BDE6EB!important;margin:8px 0 0}
+.kq .row{display:flex;justify-content:flex-end;border-top:0.5px solid #3A4552;padding-top:1rem;margin-top:1rem}.kq .sub{margin:10px 0 0;padding:10px 0 0;border-top:0.5px solid #3A4552}
+</style>
+<h2 class="sr-only">First step of the presentation form: describe what the presentation is for.</h2>
+<div class="kq"><p class="eb">Step 1</p><div class="bar"><i></i></div><h3>Your brief</h3><p class="s">For what do you want to create a presentation? Give as much information as possible.</p>
+<textarea id="br" rows="7"></textarea>
+<div style="display:flex;gap:8px;margin-top:6px"><button type="button" class="mini" id="clr">Clear</button><button type="button" class="mini" id="ex">Restore example</button></div>
+<p class="meta">Replace the parts in [brackets] with your own information and leave out anything that doesn't apply. You can also write your own story. Claude uses this to fill in the chapters that follow and marks everything it filled in with ✦. The rest of KLERQ's data loads while you type.</p>
+<p class="err" id="err"></p><div class="row"><button type="button" class="go" id="go">Continue →</button></div><div id="res"></div></div>
+<script>
+const DATA=/*DATA_START*/{"brief":""}/*DATA_END*/;
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");const EX="We are preparing a presentation for [client name]. It is about [the occasion, the services or scope, or the client's question]. From our side, [team members] will be part of it, with [name] leading. We want to show [specific matters or work highlights, or all our experience]. The deadline is [date].";
+let sent=false;$("br").value=DATA.brief||EX;const grow=()=>{const t=$("br");t.style.height="auto";t.style.height=Math.max(190,t.scrollHeight+4)+"px";};$("br").oninput=()=>{$("err").textContent="";grow();};setTimeout(grow,0);
+$("clr").onclick=()=>{if(sent)return;$("br").value="";grow();$("br").focus();};$("ex").onclick=()=>{if(sent)return;$("br").value=EX;grow();$("br").focus();};
+const firstPh=()=>{const t=$("br"),m=/\[[^\]]*\]/.exec(t.value);if(m){t.focus();t.setSelectionRange(m.index,m.index+m[0].length);}};$("br").onfocus=()=>{if($("br").value===EX)setTimeout(firstPh,0);};
+function trySend(t){const m=$("sm");try{if(typeof sendPrompt!=="function")throw 0;sendPrompt(t);m.textContent="Sent. Claude fills in the chapters and opens them in the next box.";}catch(e){m.textContent="Couldn't send automatically. Copy the text below and paste it into the chat.";}}
+$("go").onclick=()=>{if(sent)return;const b=$("br").value.trim();const ph=t=>(t.match(/\[[^\]]*\]/g)||[]).length;if(b===EX.trim()||ph(b)>=ph(EX)){$("err").textContent="Fill in the story first: replace the parts in [brackets] with your own information.";firstPh();return;}
+sent=true;$("go").textContent="Sent ✓";$("br").readOnly=true;const txt="[Presentation form] Brief\n"+b;
+$("res").innerHTML=`<div class="sub"><p class="ok" id="sm"></p><textarea id="out" rows="4" readonly style="margin-top:8px">${esc(txt)}</textarea><div style="display:flex;gap:8px;margin-top:6px"><button type="button" class="mini" id="cp">Copy</button><button type="button" class="mini" id="rs">Try sending again ↗</button></div></div>`;
+$("cp").onclick=()=>{const o=$("out");o.focus();o.select();try{document.execCommand("copy");}catch(e){}if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>{});};$("rs").onclick=()=>trySend(txt);trySend(txt);};
+</script>

@@ -1,0 +1,360 @@
+<style>
+.kq{background:#1C2530!important;color:#FFFFFF!important;border-radius:12px;padding:1.5rem 1.75rem;color-scheme:dark}
+.kq *{color:inherit}
+.kq .eb{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#F4E6A1!important;margin:0 0 8px}
+.kq .bar{height:4px;background:#3A4552;border-radius:2px;margin:0 0 1.25rem}.kq .bar i{display:block;height:4px;background:#5FB4BE;border-radius:2px}
+.kq h3{color:#FFFFFF!important;margin:0 0 4px}
+.kq .s{font-size:13px;color:#C9CFD6!important;margin:0 0 1rem}
+.kq .l{display:block;font-size:14px;font-weight:500;margin:0 0 6px;color:#FFFFFF!important}
+.kq .f{margin:0 0 1.1rem}
+.kq .card{display:flex;gap:12px;align-items:flex-start;border:0.5px solid #4A5563;border-radius:12px;padding:12px 14px;margin:0 0 10px;cursor:pointer}
+.kq .card.on{border:1px solid #5FB4BE}
+.kq input[type=radio],.kq input[type=checkbox]{accent-color:#5FB4BE;margin-top:4px}
+.kq .t{font-size:15px;font-weight:500;color:#FFFFFF!important}
+.kq .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:var(--radius);margin-left:6px;vertical-align:1px}
+.kq .tg-src{background:#3A4552;color:#E3E7EB!important}.kq .tg-rec{background:#1F4A50;color:#BDE6EB!important}.kq .tg-dr{background:#4D4730;color:#F4E6A1!important}
+.kq .why{font-size:13px;color:#BDE6EB!important;margin:4px 0 0}
+.kq .pv{font-size:13px;color:#C9CFD6!important;margin:6px 0 0;line-height:1.6;white-space:pre-line}
+.kq .meta{font-size:12px;color:#9AA5B1!important;margin:4px 0 0}
+.kq .sub{margin:10px 0 0;padding:10px 0 0;border-top:0.5px solid #3A4552}
+.kq input[type=text],.kq textarea,.kq select{width:100%;background:#26303C!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;caret-color:#FFFFFF!important;border:0.5px solid #4A5563!important;border-radius:var(--radius)!important;padding:8px 10px!important;font:inherit!important;font-size:14px!important;box-sizing:border-box!important;box-shadow:none!important}
+.kq input::placeholder,.kq textarea::placeholder{color:#8792A0!important;-webkit-text-fill-color:#8792A0!important}
+.kq button{font:inherit!important;font-size:14px!important;border-radius:var(--radius)!important;padding:6px 14px!important;cursor:pointer;box-shadow:none!important}
+.kq button.more,.kq button.mini{font-size:12px!important;padding:2px 8px!important;margin-top:6px;background:transparent!important;color:#F4E6A1!important;border:0.5px solid #8C845E!important}
+.kq button.sk{background:transparent!important;color:#FFFFFF!important;border:0.5px solid #6B7684!important}
+.kq button.go{background:#5FB4BE!important;color:#FFFFFF!important;border:0.5px solid #5FB4BE!important}
+.kq button:disabled{opacity:1!important;color:#FFFFFF!important}
+.kq .err{font-size:13px;color:#F4A1A1!important;margin:8px 0 0}
+.kq .row{display:flex;gap:8px;justify-content:flex-end;border-top:0.5px solid #3A4552;padding-top:1rem;margin-top:1rem}
+.kq .chk{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:5px 0;color:#E3E7EB!important;cursor:pointer}
+.kq .ov{display:flex;gap:10px;align-items:flex-start;border:0.5px solid #4A5563;border-radius:12px;padding:10px 12px;margin:0 0 8px}
+.kq .ov.off .t,.kq .ov.off .pv{color:#7A8592!important}
+.kq .cnt{font-size:13px;color:#F4E6A1!important;margin:0 0 10px}
+.kq .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.kq .chips button.mini{margin-top:0}
+.kq .tsel{margin:0 0 6px}
+.kq button.selbtn{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;background:#26303C!important;color:#FFFFFF!important;border:0.5px solid #4A5563!important;padding:9px 12px!important}
+.kq button.selbtn.op{border-color:#5FB4BE!important}.kq .car{color:#F4E6A1!important;margin-left:8px}
+.kq .menu{margin-top:6px;background:#212B36;border:0.5px solid #4A5563;border-radius:var(--radius);padding:6px;max-height:320px;overflow-y:auto}
+.kq .menu .mq{margin:0 0 4px}
+.kq .mh{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9AA5B1!important;padding:8px 10px 4px}
+.kq button.opt{display:block;width:100%;text-align:left;background:transparent!important;color:#FFFFFF!important;border:0!important;padding:7px 10px!important;border-radius:6px!important}
+.kq button.opt:hover,.kq button.opt:focus{background:#2E3945!important;outline:none}.kq button.opt.cur{background:#1F4A50!important}
+.kq .opt .on{font-size:14px}.kq .opt .os{display:block;font-size:12px;color:#9AA5B1!important;margin-top:2px}
+.kq .sp{border:0.5px solid #4A5563;border-radius:12px;padding:12px 14px;margin-top:10px}
+.kq .ai{display:flex;gap:8px;align-items:flex-start;background:#2A2748;border:0.5px solid #6E66C9;border-radius:var(--radius);padding:8px 12px;margin:0 0 1rem;font-size:13px;color:#DAD6FF!important}
+.kq .ai b{font-weight:500;color:#FFFFFF!important}
+.kq .tg-ai{background:#3B3670;color:#DAD6FF!important}
+.kq .brief{font-size:13px;color:#C9CFD6!important;background:#26303C;border-radius:var(--radius);padding:10px 12px;white-space:pre-line;line-height:1.6;margin:0}
+.kq .sph{font-size:13px;font-weight:500;color:#E3E7EB!important}
+.kq .spm{font-size:11px;color:#9AA5B1!important;margin:2px 0 0}
+.kq .spw{font-size:12px;color:#BDE6EB!important;margin:2px 0 0}
+.kq .txt{background:#FFFFFF!important;color:#1C2530!important;border-radius:var(--radius);padding:12px 14px;margin-top:10px}
+.kq .txt p{font-size:15px;line-height:1.65;color:#1C2530!important;margin:0;white-space:pre-line}
+.kq .txt button.more{color:#1C2530!important;border-color:#9AA5B1!important;margin-top:8px}
+.kq .menu{background:#FFFFFF!important;border:0.5px solid #C9CFD6!important;padding:8px!important;max-height:420px!important}
+.kq .menu .mq{background:#F4F6F8!important;color:#1C2530!important;-webkit-text-fill-color:#1C2530!important;caret-color:#1C2530!important;border:0.5px solid #C9CFD6!important;margin:0 0 6px!important}
+.kq .menu .mq::placeholder{color:#8792A0!important;-webkit-text-fill-color:#8792A0!important}
+.kq .menu .mh{color:#6B7684!important;padding:10px 6px 6px!important;border-top:0.5px solid #E3E7EB}
+.kq .menu .mh:first-of-type{border-top:0}
+.kq .menu button.opt{background:#FFFFFF!important;color:#1C2530!important;border:0.5px solid #E3E7EB!important;border-radius:var(--radius)!important;padding:10px 12px!important;margin:0 0 6px!important}
+.kq .menu button.opt:hover,.kq .menu button.opt:focus{background:#F4F6F8!important;border-color:#9AA5B1!important}
+.kq .menu button.opt.cur{background:#EAF6F7!important;border:1px solid #5FB4BE!important}
+.kq .menu .orow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.kq .menu .on{font-size:14px;font-weight:500;color:#1C2530!important}
+.kq .menu .os{display:block;font-size:11px;color:#6B7684!important;margin-top:2px}
+.kq .menu .op{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;line-height:1.5;color:#3A4552!important;margin-top:6px;white-space:normal}
+.kq .menu .otag{font-size:11px;padding:1px 8px;border-radius:var(--radius)}
+.kq .menu .ost{background:#EEF0F2;color:#3A4552!important}.kq .menu .odr{background:#FBF3D5;color:#6B5A12!important}
+.kq .menu .orec{background:#D7EEF0;color:#1F4A50!important}.kq .menu .oed{background:#E6E3FA;color:#3B3670!important}
+.kq .menu .ochk{margin-left:auto;color:#1F4A50!important;font-weight:500}
+.kq .menu .odraft .on{color:#1F4A50!important}
+.kq .menu .mnone{font-size:12px;color:#6B7684!important;padding:4px 6px;margin:0}
+.kq .txt{position:relative;padding-right:92px!important}
+.kq .tbtns{position:absolute;top:8px;right:8px;display:flex;gap:6px}
+.kq .txt button.edbtn{background:#F4F6F8!important;color:#1C2530!important;border:0.5px solid #C9CFD6!important;padding:5px 7px!important;line-height:0;display:flex}
+.kq .txt button.aibtn{background:#EFEDFC!important;color:#3B3670!important;border:0.5px solid #B9B3EE!important;padding:4px 9px!important;font-size:12px!important;font-weight:500!important;line-height:1.2}
+.kq .txt button.aibtn:hover{background:#E2DEFA!important}
+.kq .aih{font-size:14px!important;font-weight:500;color:#3B3670!important;margin:0 0 8px!important}
+.kq .txt textarea.aita{background:#FFFFFF!important;color:#1C2530!important;-webkit-text-fill-color:#1C2530!important;caret-color:#1C2530!important;border:1px solid #B9B3EE!important}
+.kq .txt textarea.aita::placeholder{color:#8792A0!important;-webkit-text-fill-color:#8792A0!important}
+.kq .aichk{display:flex;gap:6px;align-items:center;font-size:13px;color:#3A4552!important;margin-top:8px}
+.kq .aimeta{font-size:11px!important;color:#6B7684!important;margin:8px 0 0!important}
+.kq .txt button.edbtn:hover{background:#E3E7EB!important}
+.kq .txt textarea.edta{background:#FFFFFF!important;color:#1C2530!important;-webkit-text-fill-color:#1C2530!important;caret-color:#1C2530!important;border:1px solid #5FB4BE!important;font-size:15px!important;line-height:1.6!important}
+.kq .edbar{display:flex;gap:6px;margin-top:8px}
+.kq .edbar button{font-size:12px!important;padding:3px 10px!important;background:#FFFFFF!important;color:#1C2530!important;border:0.5px solid #9AA5B1!important}
+.kq .edbar button.aigo{background:#6E66C9!important;color:#FFFFFF!important;border-color:#6E66C9!important}
+.kq .edbar button.edok{background:#5FB4BE!important;color:#FFFFFF!important;border-color:#5FB4BE!important}
+.kq .tg-ed{background:#3B3670;color:#DAD6FF!important}
+.kq .sprow{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.kq .spl{font-size:12px;color:#C9CFD6!important;display:flex;gap:6px;align-items:center}
+.kq .spl select{width:auto!important;padding:4px 8px!important;font-size:13px!important}
+.kq .hlbar{display:flex;flex-direction:column;gap:8px}
+.kq .hlfs{display:flex;gap:8px;flex-wrap:wrap}
+.kq .hlfs select{width:auto!important;flex:1 1 150px;font-size:13px!important;padding:6px 8px!important}
+.kq .hlchipsbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.kq .hfg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.kq .hfg input[type=date],.kq .hfg input[type=number]{width:100%;background:#26303C!important;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;border:0.5px solid #4A5563!important;border-radius:var(--radius)!important;padding:6px 8px!important;font:inherit!important;font-size:13px!important;box-sizing:border-box!important;box-shadow:none!important;color-scheme:dark}
+.kq .hfg input[type=text],.kq .hfg select{font-size:13px!important;padding:6px 8px!important}
+.kq .hfg input[type=number]::placeholder{color:#8792A0!important;-webkit-text-fill-color:#8792A0!important}
+.kq .hfd{display:flex;flex-direction:column;gap:2px;font-size:11px;color:#9AA5B1!important}
+.kq button.chip{font-size:12px!important;padding:3px 10px!important;background:transparent!important;color:#E3E7EB!important;border:0.5px solid #6B7684!important}
+.kq button.chip.on{background:#1F4A50!important;color:#BDE6EB!important;border-color:#5FB4BE!important}
+.kq .hlchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.kq .hlchip{display:inline-flex;align-items:center;gap:6px;font-size:12px;background:#1F4A50;color:#BDE6EB!important;border-radius:var(--radius);padding:3px 4px 3px 10px}
+.kq .hlchip button{background:transparent!important;border:0!important;color:#BDE6EB!important;padding:0 6px!important;font-size:14px!important;line-height:1}
+.kq .hlc{display:flex;background:#FFFFFF!important;color:#1C2530!important;border:1px solid #E3E7EB;border-radius:12px;margin:0 0 10px;overflow:hidden}
+.kq .hlc.on{border:2px solid #5FB4BE}
+.kq .hlc *{color:#1C2530}
+.kq .hlmain{flex:1;min-width:0;padding:14px 16px}
+.kq .hlpills{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
+.kq .pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:6px;border:0.5px solid #E3E7EB;background:#FFFFFF;color:#3A4552!important}
+.kq .pill.ap{background:#EAF7EE;border-color:#BFE5CB;color:#1E7A3C!important}.kq .pill.dr{background:#FFF6E5;border-color:#F2D9A6;color:#8A5A00!important}
+.kq .pill.cf{background:#FDECEC;border-color:#F3C2C2;color:#A12B2B!important}.kq .pill.rc{background:#D7EEF0;border-color:#A9D8DD;color:#1F4A50!important}.kq .pill.vr{background:#EEF0F2;color:#3A4552!important}
+.kq .hlsel{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:#3A4552!important;cursor:pointer}
+.kq .hlsel input{margin:0!important}
+.kq .hlt{font-size:17px;font-weight:500;line-height:1.35;color:#1C2530!important;margin:0 0 6px}
+.kq .hls{font-size:13px;line-height:1.6;color:#3A4552!important;margin:0}
+.kq .hls.cl{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.kq .hlwhy{font-size:12px;color:#1F4A50!important;margin:8px 0 0}
+.kq button.hlmore2{background:transparent!important;border:0!important;padding:0!important;margin-top:6px;font-size:12px!important;color:#1F4A50!important;text-decoration:underline}
+.kq .hlside{width:200px;flex:0 0 200px;background:#F7F8FA;border-left:1px solid #E3E7EB;padding:12px 14px;font-size:12px}
+.kq .hlk{font-size:11px;color:#6B7684!important;margin:8px 0 3px}.kq .hlk:first-child{margin-top:0}
+.kq .hlp{display:flex;align-items:center;gap:6px;margin:0 0 4px;font-size:12px;color:#1C2530!important}
+.kq .av{width:20px;height:20px;border-radius:50%;background:#D7EEF0;color:#1F4A50!important;font-size:9px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;flex:0 0 20px}
+.kq .hlchips2{display:flex;flex-wrap:wrap;gap:4px}.kq .ch{font-size:10px;padding:1px 7px;border-radius:6px;background:#E6F4F6;color:#1F4A50!important}
+.kq .hlmeta2{font-size:11px;color:#6B7684!important;margin:8px 0 0}
+@media (max-width:560px){.kq .hlc{flex-direction:column}.kq .hlside{width:auto;flex:none;border-left:0;border-top:1px solid #E3E7EB}}
+.kq .clgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0 16px}
+.kq .upl{border:1px dashed #5FB4BE;border-radius:12px;padding:12px 14px;margin-top:10px;background:#1B3A40}
+.kq .ok{font-size:13px;color:#BDE6EB!important;margin:8px 0 0}
+</style>
+<h2 class="sr-only">Step-by-step form for building a presentation from KLERQ content, ending with an overview to approve.</h2>
+<div class="kq" id="app"><p class="s">Loading the form…</p></div>
+<script>
+const DATA=/*DATA_START*/{
+"general":{"client":"Van Doorne","title":"","about":""},
+
+"clients":["Orka","Van Doorne"],
+"texts":[{"n":"Directory strategy preface","src":"Orka legal directory pitch","c":"Orka","cs":false,"t":"We advise law firms on legal directory strategy and submission support for Chambers and Legal 500."}],
+"textRecs":{"preface":[0,"Written as a preface for law firms."],"scope":["d","No stored text describes a scope of work."],"firm":["d",""]},
+"specialists":[{"n":"Jorn Vermeulen","r":"CEO","p":["Law firm positioning"],"b":[{"n":"English bio","st":"Approved","t":"Bio text"}],"rec":"Leads strategy work with law firms"}],
+"industries":[],
+"highlights":[{"n":"Highlight title","v":"","c":"Orka","st":"Approved","s":"One-line summary","sp":"Jorn Vermeulen","rec":"Why it fits"}]
+}/*DATA_END*/;
+const CL=DATA.clients,TX=DATA.texts,SP=DATA.specialists,HL=DATA.highlights,IND=DATA.industries||[];
+const PH=DATA.phase||"full";const BRIEF=(DATA.brief||"").trim(),AI=DATA.ai||{},AIF=new Set(DATA.aiFields||[]);
+const PRAC=[...new Set(SP.flatMap(x=>x.p))];
+const AD=[{k:"team",n:"Team text",kind:"text",d:"An intro-style slide about the team"},{k:"desc",n:"Description slide",kind:"text",d:"An extra text slide"},{k:"fspec",n:"Featured specialist",kind:"spec",d:"One specialist with text and photo"},{k:"fprac",n:"Featured practice",kind:"prac",d:"One practice with text and photo"},{k:"testi",n:"Testimonials",kind:"none",d:"Client feedback slide"},{k:"pubs",n:"Publications",kind:"none",d:"List of publications"},{k:"find",n:"Featured industry",kind:"none",d:"One industry with text and photo"}];
+const NM={chapters:"Chapters",brief:"Your brief",general:"General information",preface:"Preface",scope:"Scope of work",firm:"Firm",specialists:"Specialists",pricing:"Pricing",practices:"Practices",industries:"Industries",highlights:"Work highlights",clients:"Clients",additional:"Additional chapters",overview:"Overview",export:"Export"};AD.forEach(a=>NM[a.k]=a.n);
+const HINT={chapters:"Tick the chapters you want in the presentation. You only go through the ones you tick.",brief:"What you wrote at the start. Claude used it to fill in the chapters that follow.",general:"Title, client and what the pitch is about.",preface:"The opening text. These texts come from earlier KLERQ presentations.",scope:"What the engagement covers. A stored text, or a new draft.",firm:"About the firm.",specialists:"Tick the people to include, then pick their role and bio.",pricing:"Describe the pricing you want in the presentation: the fee structure, the amounts or rates, and anything the pricing table or conditions should show. Claude turns this into the pricing chapter and saves it in the right format.",practices:"Pre-ticked from the specialists you chose.",industries:"Industries stored in KLERQ.",highlights:"One slide per highlight. Tick the ones to include; use the Selected filter to see what you picked.",clients:"Client references for the list slide. Pre-ticked from your chosen highlights.",additional:"Set up the extra chapters you ticked.",overview:"Reorder, include or leave out chapters.",export:"Last question."};
+const ST=()=>[...(BRIEF?["brief"]:[]),"general","chapters",...CH.filter(k=>!S.skip[k]),...(AD.some(a=>S.ad[a.k])?["additional"]:[]),"overview","export"];
+const CH=["preface","scope","firm","specialists","pricing","practices","industries","highlights","clients"];
+const REC=Object.assign({preface:["d",""],scope:["d",""],firm:["d",""]},DATA.textRecs||{});
+const S={k:BRIEF?(PH==="rest"?"general":"brief"):"general",ret:false,sent:false,g:Object.assign({client:"",title:"",about:""},DATA.general),skip:{},
+preface:{c:REC.preface[0],ins:(DATA.textIns||{}).preface||""},scope:{c:REC.scope[0],ins:(DATA.textIns||{}).scope||""},firm:{c:REC.firm[0],ins:(DATA.textIns||{}).firm||""},sp:{},
+pr:{desc:typeof DATA.pricing==="string"?DATA.pricing:((DATA.pricing||{}).desc||"")},
+pc:{sel:null},ind:{sel:new Set(IND.filter(x=>x.rec).map(x=>x.n))},hl:new Set(HL.map((h,i)=>h.rec?i:-1).filter(i=>i>=0)),cl:{sel:null,f:""},ad:{},exp:"",
+order:["preface","scope","firm","specialists","pricing","practices","industries","highlights","clients"]};
+SP.filter(x=>x.rec).forEach((x,i)=>S.sp[x.n]={role:i===0?"lead":"supporting",bio:(DATA.bioDrafts||{})[x.n]&&(DATA.bioPick||{})[x.n]!=="stored"?"ai":x.b.length?0:null,ed:{}});
+const adNew=a=>a.kind==="text"?{c:"d",ins:""}:a.kind==="spec"?{v:SP[0]?SP[0].n:""}:a.kind==="prac"?{v:PRAC[0]||""}:{};
+function syncAd(){AD.forEach(a=>{const i=S.order.indexOf(a.k);if(S.ad[a.k]&&i<0)S.order.push(a.k);if(!S.ad[a.k]&&i>=0)S.order.splice(i,1);});}
+if(Array.isArray(DATA.chapters)){CH.forEach(k=>{if(!DATA.chapters.includes(k))S.skip[k]=true;});AD.forEach(a=>{if(DATA.chapters.includes(a.k))S.ad[a.k]=adNew(a);});syncAd();}
+if(!IND.length)S.skip.industries=true;
+const $=id=>document.getElementById(id);const app=$("app");
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const TSEL={};
+const AIDR=DATA.aiDrafts||{};const drKey=n=>n.replace(/^ad_/,"");
+const srcLine=x=>x.o?esc(x.src||"Organisation text"):"From: "+esc(x.src);
+const reEsc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function otherClients(i){const cur=S.g.client.trim().toLowerCase(),x=TX[i],hay=(x.n+" "+x.t).toLowerCase();return CL.filter(c=>{const n=c.trim().toLowerCase();return n.length>=3&&n!==cur&&!cur.includes(n)&&new RegExp("(^|[^\\p{L}\\p{N}])"+reEsc(n)+"($|[^\\p{L}\\p{N}])","u").test(hay);});}
+function txOk(i){const x=TX[i];if(!x)return false;const cur=S.g.client.trim().toLowerCase();if(x.cs&&x.c&&x.c.trim().toLowerCase()!==cur)return false;return !otherClients(i).length;}
+function sameCl(i){const c=(TX[i].c||"").trim().toLowerCase();return !!c&&c===S.g.client.trim().toLowerCase();}
+function fixSel(st,rec){if(!st)return;const rOk=typeof rec==="number"&&rec>=0&&txOk(rec);if(typeof st.c==="number"&&!txOk(st.c)){st.c=rOk?rec:"d";st.auto=!rOk;}else if(st.auto&&rOk){st.c=rec;st.auto=false;}}
+function fixAllTexts(){["preface","scope","firm"].forEach(k=>fixSel(S[k],REC[k][0]));Object.values(S.ad).forEach(st=>{if(st&&"c" in st)fixSel(st,-1);});}
+function textCards(name,st,rec,why){TSEL[name]={rec,why};return `<div class="tsel" data-tsel="${name}"></div>`;}
+function selLabel(st){return st.c==="ai"?"✦ Claude's draft":st.c==="d"?"Draft a new one":st.c===null||st.c===undefined||!TX[st.c]?"Select a text":TX[st.c].n;}
+function bindMore(el){el.querySelectorAll(".more").forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const pv=b.previousElementSibling;const o=b.textContent==="Hide full text";pv.textContent=o?pv.dataset.short:pv.dataset.full;b.textContent=o?"Show full text":"Hide full text";});}
+function bindText(el,name,st){const box=el.querySelector(`[data-tsel="${name}"]`);if(!box)return;let {rec,why}=TSEL[name]||{rec:-1,why:""};fixSel(st,rec);if(typeof rec==="number"&&rec>=0&&!txOk(rec)){rec=-1;why="";}let open=false,q="";
+const recTag=v=>rec===v?'<span class="tag tg-rec">Recommended</span>':"";
+const PEN='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>';
+let editing=false,aiing=false;st.ed=st.ed||{};
+const isEd=i=>st.ed[i]!=null;
+function menu(){const f=q.trim().toLowerCase();const ok=TX.map((x,i)=>({x,i})).filter(({i})=>txOk(i)),hid=TX.length-ok.length;
+const match=({x})=>!f||(x.n+" "+x.src+" "+x.t).toLowerCase().includes(f);
+const org=ok.filter(o=>TX[o.i].o&&match(o)),same=ok.filter(o=>!TX[o.i].o&&sameCl(o.i)&&match(o)),oth=ok.filter(o=>!TX[o.i].o&&!sameCl(o.i)&&match(o));
+const item=({x,i})=>`<button type="button" class="opt${st.c===i?" cur":""}" data-v="${i}"><span class="orow"><span class="on">${esc(x.n)}</span>${rec===i?'<span class="otag orec">Recommended</span>':""}${x.st?`<span class="otag ${x.st==="Draft"?"odr":"ost"}">${esc(x.st)}</span>`:""}${x.lang?`<span class="otag ost">${esc(x.lang)}</span>`:""}${isEd(i)?'<span class="otag oed">Edited</span>':""}${st.c===i?'<span class="ochk">✓</span>':""}</span><span class="os">${srcLine(x)}</span><span class="op">${esc(isEd(i)?st.ed[i]:x.t)}</span></button>`;
+const sec=(t,a)=>a.length?`<div class="mh">${esc(t)} · ${a.length}</div>${a.map(item).join("")}`:"";
+const cn=S.g.client.trim();
+return `<div class="menu"><input type="text" class="mq" placeholder="Search texts" value="${esc(q)}">${sec("Organisation texts",org)}${sec(cn?"From "+cn+" presentations":"From this client's presentations",same)}${sec("From other presentations",oth)}${!org.length&&!same.length&&!oth.length?'<p class="mnone">No texts match.</p>':""}${hid?`<p class="mnone">${hid} text${hid>1?"s":""} hidden: written for or naming another client.</p>`:""}<div class="mh">New</div>${AIDR[drKey(name)]?`<button type="button" class="opt odraft${st.c==="ai"?" cur":""}" data-v="ai"><span class="orow"><span class="on">✦ Claude's draft</span>${recTag2("ai")}${st.c==="ai"?'<span class="ochk">✓</span>':""}</span><span class="os">Written by Claude for this presentation</span><span class="op">${esc(st.aiEd!=null?st.aiEd:AIDR[drKey(name)])}</span></button>`:`<button type="button" class="opt odraft${st.c==="d"?" cur":""}" data-v="d"><span class="orow"><span class="on">+ Draft a new one</span>${recTag2("d")}${st.c==="d"?'<span class="ochk">✓</span>':""}</span><span class="os">Claude writes it after you submit and shows it to you first</span></button>`}</div>`;}
+function recTag2(v){return rec===v?'<span class="otag orec">Recommended</span>':"";}
+function prev(){if(st.c==="ai"){const ed=st.aiEd!=null,body=ed?st.aiEd:AIDR[drKey(name)]||"";
+const head=`<div class="sph">Claude's draft<span class="tag tg-ai">✦ Written by Claude</span>${recTag("ai")}${ed?'<span class="tag tg-ed">Edited</span>':""}</div><p class="spm">Written for this presentation from your brief and the KLERQ texts. Nothing is saved until you approve.</p>${rec==="ai"&&why?`<p class="spw">${esc(why)}</p>`:""}`;
+if(editing)return `<div class="sp">${head}<div class="txt" style="padding-right:14px"><textarea class="edta" rows="9">${esc(body)}</textarea><div class="edbar"><button type="button" class="edok">Done</button><button type="button" class="edno">Cancel</button>${ed?'<button type="button" class="edrs">Restore Claude\'s version</button>':""}</div></div></div>`;
+return `<div class="sp">${head}<div class="txt"><div class="tbtns"><button type="button" class="edbtn" aria-label="Edit this text" title="Edit this text">${PEN}</button></div><p style="white-space:pre-line">${esc(body)}</p></div><label class="l" style="font-weight:400;font-size:12px;color:#C9CFD6!important;margin:10px 0 4px">Want changes? Tell Claude what to adjust (applied after you approve)</label><textarea rows="2" data-ins="${name}" placeholder="Shorter, more formal, mention onboarding…">${esc(st.ins||"")}</textarea></div>`;}
+if(st.c==="d")return `<div class="sp"><div class="t">Draft a new one<span class="tag tg-dr">Draft</span>${recTag("d")}</div>${rec==="d"&&why?`<p class="why">${esc(why)}</p>`:""}<p class="pv">I'll write it after you submit and show it to you before anything is saved.</p>${typeof st.base==="number"&&TX[st.base]?`<p class="spw">Based on: ${esc(TX[st.base].n)} <button type="button" class="mini nobase">Start from scratch</button></p>`:""}<textarea rows="2" data-ins="${name}" placeholder="What should it say? (optional)" style="margin-top:8px">${esc(st.ins||"")}</textarea></div>`;
+const x=TX[st.c];if(!x)return "";const ed=isEd(st.c),body=ed?st.ed[st.c]:x.t;
+const head=`<div class="sph">${esc(x.n)}${recTag(st.c)}${ed?'<span class="tag tg-ed">Edited</span>':""}</div><p class="spm">${srcLine(x)}${x.st?" · "+esc(x.st):""}</p>${rec===st.c&&why?`<p class="spw">${esc(why)}</p>`:""}`;
+if(aiing)return `<div class="sp">${head}<div class="txt" style="padding-right:14px"><p class="aih">✦ Let Claude write a new ${esc(NM[name.replace(/^ad_/,"")]||"text").toLowerCase()}</p><textarea class="aita" rows="3" placeholder="What should it say? Tone, focus, length… (optional)"></textarea><label class="aichk"><input type="checkbox" class="aibase" checked> Use this text as a starting point</label><div class="edbar"><button type="button" class="aigo">Let Claude write it</button><button type="button" class="edno">Cancel</button></div><p class="aimeta">Claude writes it after you approve the form and shows it to you before anything is saved.</p></div></div>`;
+if(editing)return `<div class="sp">${head}<div class="txt"><textarea class="edta" rows="9">${esc(body)}</textarea><div class="edbar"><button type="button" class="edok">Done</button><button type="button" class="edno">Cancel</button>${ed?'<button type="button" class="edrs">Restore original</button>':""}</div></div></div>`;
+const long=body.length>220,sh=long?body.slice(0,220)+"…":body;
+return `<div class="sp">${head}<div class="txt"><div class="tbtns"><button type="button" class="aibtn" aria-label="Let Claude write a new text" title="Let Claude write a new text">✦ AI</button><button type="button" class="edbtn" aria-label="Edit this text" title="Edit this text">${PEN}</button></div><p data-full="${esc(body)}" data-short="${esc(sh)}">${esc(sh)}</p>${long?'<button type="button" class="more">Show full text</button>':""}</div></div>`;}
+function draw(){box.innerHTML=`<button type="button" class="selbtn${open?" op":""}" aria-expanded="${open}"><span>${esc(selLabel(st))}</span><span class="car">${open?"▴":"▾"}</span></button>${open?menu():""}${prev()}`;
+box.querySelector(".selbtn").onclick=e=>{e.preventDefault();open=!open;editing=false;aiing=false;draw();if(open){const m=box.querySelector(".mq");if(m)m.focus();}};
+const m=box.querySelector(".mq");if(m)m.oninput=()=>{q=m.value;const pos=m.selectionStart;draw();const n=box.querySelector(".mq");n.focus();n.setSelectionRange(pos,pos);};
+box.querySelectorAll(".opt").forEach(o=>o.onclick=e=>{e.preventDefault();st.c=o.dataset.v==="d"||o.dataset.v==="ai"?o.dataset.v:+o.dataset.v;if(st.c!=="d")st.base=null;st.auto=false;open=false;editing=false;aiing=false;q="";draw();});
+const eb=box.querySelector(".edbtn");if(eb)eb.onclick=e=>{e.preventDefault();editing=true;open=false;draw();const t=box.querySelector(".edta");t.focus();t.setSelectionRange(t.value.length,t.value.length);};
+const ok=box.querySelector(".edok");if(ok)ok.onclick=e=>{e.preventDefault();const v=box.querySelector(".edta").value;if(st.c==="ai"){st.aiEd=v.trim()===(AIDR[drKey(name)]||"").trim()?null:v;}else if(v.trim()===TX[st.c].t.trim())delete st.ed[st.c];else st.ed[st.c]=v;editing=false;draw();};
+const no=box.querySelector(".edno");if(no)no.onclick=e=>{e.preventDefault();editing=false;aiing=false;draw();};
+const ab=box.querySelector(".aibtn");if(ab)ab.onclick=e=>{e.preventDefault();editing=false;open=false;if(AIDR[drKey(name)]){st.c="ai";st.auto=false;aiing=false;draw();}else{aiing=true;draw();box.querySelector(".aita").focus();}};
+const ag=box.querySelector(".aigo");if(ag)ag.onclick=e=>{e.preventDefault();const base=box.querySelector(".aibase").checked?st.c:null;st.ins=box.querySelector(".aita").value.trim();st.base=base;st.c="d";st.auto=false;aiing=false;draw();};
+const nb=box.querySelector(".nobase");if(nb)nb.onclick=e=>{e.preventDefault();st.base=null;draw();};
+const rs=box.querySelector(".edrs");if(rs)rs.onclick=e=>{e.preventDefault();if(st.c==="ai")st.aiEd=null;else delete st.ed[st.c];editing=false;draw();};
+const ta=box.querySelector(`[data-ins="${name}"]`);if(ta)ta.oninput=()=>st.ins=ta.value;bindMore(box);}
+draw();}
+function textSum(st){return st.c==="ai"?"Claude's draft [see below]"+(st.aiEd!=null?" [edited in the form]":"")+(st.ins?` (changes requested: ${st.ins})`:""):st.c==="d"?"Draft a new one"+(typeof st.base==="number"&&TX[st.base]?` based on: ${TX[st.base].n} (from: ${TX[st.base].src})${st.ed&&st.ed[st.base]!=null?" [edited, see below]":""}`:"")+(st.ins?` (${st.ins})`:""):`${TX[st.c].n} (from: ${TX[st.c].src})`+(st.ed&&st.ed[st.c]!=null?" [edited, see below]":"");}
+const B={},V={};
+const AITAG='<span class="tag tg-ai">✦ Filled in by Claude</span>';
+const aiTag=f=>AIF.has(f)?`<span data-ait="${f}">${AITAG}</span>`:"";
+const aiOff=f=>{AIF.delete(f);const t=document.querySelector(`[data-ait="${f}"]`);if(t)t.remove();};
+B.brief=el=>{el.innerHTML=`<p class="brief">${esc(BRIEF)}</p><p class="meta">Everything marked ✦ in the next chapters was filled in from this. Change anything you like.</p>`;};V.brief=()=>"";
+B.general=el=>{el.innerHTML=`<div class="f"><label class="l" for="gc">Client${aiTag("client")}</label><input type="text" id="gc" list="cls" value="${esc(S.g.client)}" placeholder="Start typing a client name"><datalist id="cls">${CL.map(c=>`<option value="${esc(c)}">`).join("")}</datalist></div><div class="f"><label class="l" for="gt">Presentation title${aiTag("title")}</label><input type="text" id="gt" value="${esc(S.g.title)}"></div><div class="f"><label class="l" for="ga">What is this pitch about? <span style="font-weight:400;color:#C9CFD6">(optional)</span>${aiTag("about")}</label><textarea id="ga" rows="2">${esc(S.g.about)}</textarea></div>`;$("gc").oninput=e=>{S.g.client=e.target.value;aiOff("client");fixAllTexts();};$("gt").oninput=e=>{S.g.title=e.target.value;aiOff("title");};$("ga").oninput=e=>{S.g.about=e.target.value;aiOff("about");};};
+B.chapters=el=>{const row=(k,n,on,dis)=>`<label class="chk"${dis?' style="cursor:default;opacity:.6"':""}><input type="checkbox" data-pick="${k}"${on?" checked":""}${dis?" disabled":""}> <span>${esc(n)}</span></label>`;
+el.innerHTML=`<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 24px"><div>${row("general","General information",true,true)}${CH.map(k=>row(k,NM[k],!S.skip[k],k==="industries"&&!IND.length)).join("")}</div><div>${AD.map(a=>row(a.k,a.n,!!S.ad[a.k],false)).join("")}</div></div>`;
+el.querySelectorAll("[data-pick]:not([disabled])").forEach(c=>c.onchange=()=>{const k=c.dataset.pick,a=AD.find(x=>x.k===k);if(a){if(c.checked)S.ad[k]=S.ad[k]||adNew(a);else delete S.ad[k];syncAd();}else{if(c.checked)delete S.skip[k];else S.skip[k]=true;}});};
+V.chapters=()=>"";
+V.general=()=>!S.g.client.trim()?"Pick a client first.":!S.g.title.trim()?"Enter a title first.":"";
+["preface","scope","firm"].forEach(k=>{B[k]=el=>{el.innerHTML=textCards(k,S[k],REC[k][0],REC[k][1]);bindText(el,k,S[k]);};V[k]=()=>"";});
+const BD=DATA.bioDrafts||{};
+function spBody(x,on){return on.bio==="ai"?(on.aiEd!=null?on.aiEd:BD[x.n]||""):on.bio===null?"":(on.ed&&on.ed[on.bio]!=null?on.ed[on.bio]:x.b[on.bio].t);}
+function bioBox(x,i,on){const PENI='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>';
+const isAi=on.bio==="ai",ed=!isAi&&on.bio!==null&&on.ed&&on.ed[on.bio]!=null,aed=isAi&&on.aiEd!=null;
+if(on.bio===null&&!BD[x.n])return `<p class="pv">(no bio stored in KLERQ)</p>${on.req?`<p class="spw">✦ Claude will write a bio after you approve.</p>`:`<button type="button" class="mini" data-spreq="${i}">✦ Let Claude write a bio</button>`}`;
+const body=spBody(x,on);
+let tags=isAi?'<span class="tag tg-ai">✦ Written by Claude</span>':"";if(ed||aed)tags+='<span class="tag tg-ed">Edited</span>';if(on.req&&!isAi)tags+='<span class="tag tg-ai">✦ Claude will tailor this</span>';
+const head=`<div class="sph" style="margin-top:10px">${isAi?"Claude's version":esc(x.b[on.bio].n)}${tags}</div><p class="spm">${isAi?"Tailored for this presentation. Nothing is saved until you approve.":esc(x.b[on.bio].st)+" bio from KLERQ"}</p>`;
+if(S.spEdit===x.n)return head+`<div class="txt" style="padding-right:14px"><textarea class="edta" data-spta="${i}" rows="8">${esc(body)}</textarea><div class="edbar"><button type="button" class="edok" data-spok="${i}">Done</button><button type="button" class="edno" data-spno="${i}">Cancel</button>${ed||aed?`<button type="button" class="edrs" data-sprs="${i}">${isAi?"Restore Claude's version":"Restore original"}</button>`:""}</div></div>`;
+const long=body.length>260,sh=long?body.slice(0,260)+"…":body;
+return head+`<div class="txt"><div class="tbtns">${isAi?"":`<button type="button" class="aibtn" data-spai="${i}" aria-label="Let Claude improve this bio" title="Let Claude improve this bio">✦ AI</button>`}<button type="button" class="edbtn" data-sped="${i}" aria-label="Edit this bio" title="Edit this bio">${PENI}</button></div><p data-full="${esc(body)}" data-short="${esc(sh)}">${esc(sh)}</p>${long?'<button type="button" class="more">Show full text</button>':""}</div>`;}
+B.specialists=el=>{let h="";SP.forEach((x,i)=>{const on=S.sp[x.n];h+=`<div class="card${on?" on":""}" data-i="${i}"><input type="checkbox" data-sp="${i}"${on?" checked":""}><div style="flex:1;min-width:0"><div class="t">${esc(x.n)}<span class="tag tg-src">${esc(x.r)}</span>${x.rec?'<span class="tag tg-rec">Recommended</span>':""}</div>${x.rec?`<p class="why">${esc(x.rec)}</p>`:""}<p class="meta">${esc(x.p.join(" · "))}</p>`;
+if(on){const opts=x.b.map((b,j)=>`<option value="${j}"${on.bio===j?" selected":""}>${esc(b.n)} · ${esc(b.st)}</option>`).join("")+(BD[x.n]?`<option value="ai"${on.bio==="ai"?" selected":""}>✦ Claude's version</option>`:"");
+h+=`<div class="sub"><div class="sprow"><label class="spl">Role <select data-role="${i}"><option value="lead"${on.role==="lead"?" selected":""}>Lead</option><option value="supporting"${on.role==="supporting"?" selected":""}>Supporting</option></select></label>${opts?`<label class="spl">Bio <select data-biosel="${i}">${opts}</select></label>`:""}</div>${bioBox(x,i,on)}</div>`;}
+h+=`</div></div>`;});el.innerHTML=`<p class="cnt" id="spc"></p>`+h;$("spc").textContent=Object.keys(S.sp).length+" selected";
+const R=()=>B.specialists(el),X=b=>SP[+b].n;
+el.querySelectorAll("[data-sp]").forEach(c=>c.onchange=()=>{const x=SP[+c.dataset.sp];if(c.checked)S.sp[x.n]={role:Object.values(S.sp).some(v=>v.role==="lead")?"supporting":"lead",bio:BD[x.n]?"ai":x.b.length?0:null,ed:{}};else delete S.sp[x.n];S.pc.sel=null;R();});
+el.querySelectorAll(".card[data-i]").forEach(cd=>cd.onclick=e=>{if(e.target.closest(".sub")||e.target.matches("input"))return;const c=cd.querySelector("[data-sp]");c.checked=!c.checked;c.onchange();});
+el.querySelectorAll("[data-role]").forEach(s=>s.onchange=()=>S.sp[X(s.dataset.role)].role=s.value);
+el.querySelectorAll("[data-biosel]").forEach(s=>s.onchange=()=>{const on=S.sp[X(s.dataset.biosel)];on.bio=s.value==="ai"?"ai":+s.value;S.spEdit=null;R();});
+el.querySelectorAll("[data-spai]").forEach(b=>b.onclick=e=>{e.preventDefault();const n=X(b.dataset.spai),on=S.sp[n];if(BD[n])on.bio="ai";else on.req=true;S.spEdit=null;R();});
+el.querySelectorAll("[data-spreq]").forEach(b=>b.onclick=e=>{e.preventDefault();S.sp[X(b.dataset.spreq)].req=true;R();});
+el.querySelectorAll("[data-sped]").forEach(b=>b.onclick=e=>{e.preventDefault();S.spEdit=X(b.dataset.sped);R();const t=el.querySelector(`[data-spta="${b.dataset.sped}"]`);if(t){t.focus();t.setSelectionRange(t.value.length,t.value.length);}});
+el.querySelectorAll("[data-spok]").forEach(b=>b.onclick=e=>{e.preventDefault();const x=SP[+b.dataset.spok],on=S.sp[x.n],v=el.querySelector(`[data-spta="${b.dataset.spok}"]`).value;if(on.bio==="ai")on.aiEd=v.trim()===(BD[x.n]||"").trim()?null:v;else{on.ed=on.ed||{};if(v.trim()===x.b[on.bio].t.trim())delete on.ed[on.bio];else on.ed[on.bio]=v;}S.spEdit=null;R();});
+el.querySelectorAll("[data-spno]").forEach(b=>b.onclick=e=>{e.preventDefault();S.spEdit=null;R();});
+el.querySelectorAll("[data-sprs]").forEach(b=>b.onclick=e=>{e.preventDefault();const on=S.sp[X(b.dataset.sprs)];if(on.bio==="ai")on.aiEd=null;else if(on.ed)delete on.ed[on.bio];S.spEdit=null;R();});
+el.querySelectorAll("[data-spins]").forEach(t=>t.oninput=()=>S.sp[X(t.dataset.spins)].ins=t.value);
+bindMore(el);};
+V.specialists=()=>Object.keys(S.sp).length?"":"Pick at least one specialist, or skip this chapter.";
+B.pricing=el=>{el.innerHTML=`<div class="f"><label class="l" for="prd">What should the pricing look like?</label><textarea id="prd" rows="7" placeholder="For example: a fixed fee of EUR 25,000 for implementation, then a yearly subscription of EUR 12,000. Show it as a table with one row per phase, and mention that prices exclude VAT.">${esc(S.pr.desc)}</textarea><p class="meta">Write it in your own words. After you approve, Claude builds the pricing text and table from this and shows it to you before it is saved.</p></div>`;$("prd").oninput=e=>S.pr.desc=e.target.value;};
+V.pricing=()=>S.pr.desc.trim()?"":"Describe the pricing, or skip this chapter.";
+function prSum(){const d=S.pr.desc.trim();return d?"Claude to write from: "+d.replace(/\n+/g," / "):"";}
+B.practices=el=>{const fromSp=new Set(Object.keys(S.sp).flatMap(n=>SP.find(x=>x.n===n).p));if(S.pc.sel===null)S.pc.sel=new Set(fromSp);
+if(!PRAC.length){el.innerHTML=`<p class="pv">No practices are stored on your specialists in KLERQ. Skip this chapter.</p>`;return;}
+el.innerHTML=`<p class="cnt" id="pcc"></p>`+PRAC.map((p,i)=>`<label class="chk"><input type="checkbox" data-pc="${i}"${S.pc.sel.has(p)?" checked":""}> <span>${esc(p)}${fromSp.has(p)?'<span class="tag tg-rec">From your specialists</span>':""}</span></label>`).join("");
+const cnt=()=>$("pcc").textContent=S.pc.sel.size+" selected";cnt();el.querySelectorAll("[data-pc]").forEach(c=>c.onchange=()=>{const p=PRAC[+c.dataset.pc];c.checked?S.pc.sel.add(p):S.pc.sel.delete(p);cnt();});};
+V.practices=()=>S.pc.sel&&S.pc.sel.size?"":PRAC.length?"Tick at least one practice, or skip this chapter.":"There's nothing to choose here. Skip this chapter.";
+B.industries=el=>{if(!IND.length){el.innerHTML=`<p class="pv">No industries are stored in KLERQ yet, so there's nothing to choose. This chapter is left out.</p>`;return;}
+el.innerHTML=`<p class="cnt" id="inc"></p>`+IND.map((x,i)=>`<label class="chk"><input type="checkbox" data-in="${i}"${S.ind.sel.has(x.n)?" checked":""}> <span>${esc(x.n)}${x.rec?'<span class="tag tg-rec">Recommended</span>':""}${x.rec?`<span class="why" style="display:block">${esc(x.rec)}</span>`:""}</span></label>`).join("");
+const cnt=()=>$("inc").textContent=S.ind.sel.size+" selected";cnt();el.querySelectorAll("[data-in]").forEach(c=>c.onchange=()=>{const n=IND[+c.dataset.in].n;c.checked?S.ind.sel.add(n):S.ind.sel.delete(n);cnt();});};
+V.industries=()=>S.ind.sel.size?"":IND.length?"Tick at least one industry, or skip this chapter.":"There's nothing to choose here. Skip this chapter.";
+const hlName=h=>h.n+(h.v?` (${h.v})`:"");
+const SPL=x=>(x||"").split(/,\s*/).filter(Boolean);
+const HLF=[{k:"t",l:"Work highlight commercial title",ty:"text",b:1,g:h=>h.n+" "+(h.v||"")+" "+(h.s||"")},{k:"c",l:"Companies",ty:"sel",b:1,g:h=>h.cs||[h.c]},{k:"sp",l:"Specialists",ty:"sel",b:1,g:h=>SPL(h.sp)},{k:"st",l:"Status",ty:"sel",b:1,g:h=>[h.st]},
+{k:"m",l:"Matter internal name",ty:"text",g:h=>h.m||""},{k:"ind",l:"Industries",ty:"sel",g:h=>h.ind||[]},{k:"pr",l:"Practices",ty:"sel",g:h=>h.pr||[]},{k:"of",l:"Offices",ty:"sel",g:h=>h.of||[]},{k:"ms",l:"Matter status",ty:"sel",g:h=>[h.ms]},
+{k:"sdf",l:"Start date from",ty:"date",g:h=>h.sd,op:">="},{k:"sdt",l:"Start date to",ty:"date",g:h=>h.sd,op:"<="},{k:"edf",l:"End date from",ty:"date",g:h=>h.ed,op:">="},{k:"edt",l:"End date to",ty:"date",g:h=>h.ed,op:"<="},
+{k:"dmin",l:"Min deal value",ty:"num",g:h=>h.dvu!=null?h.dvu:h.dv,op:">="},{k:"dmax",l:"Max deal value",ty:"num",g:h=>h.dvl!=null?h.dvl:h.dv,op:"<="},
+{k:"xb",l:"Cross border",ty:"yn",g:h=>h.xb},{k:"conf",l:"Confidential",ty:"yn",g:h=>h.conf},{k:"wl",l:"Work highlight labels",ty:"sel",g:h=>h.wl||[]},{k:"ml",l:"Matter label",ty:"sel",g:h=>h.ml||[]}];
+S.hlv={f:{},adv:false,only:"",lim:25,open:-1};
+function hlPass(h,f){for(const d of HLF){const val=f[d.k];if(val===undefined||val==="")continue;const x=d.g(h);
+if(d.ty==="text"){if(!String(x||"").toLowerCase().includes(val.trim().toLowerCase()))return false;}
+else if(d.ty==="sel"){if(!(x||[]).includes(val))return false;}
+else if(d.ty==="yn"){if(!!x!==(val==="yes"))return false;}
+else if(d.ty==="date"){if(!x)return false;const xs=String(x).slice(0,10);if(d.op===">="?xs<val:xs>val)return false;}
+else if(d.ty==="num"){const n=parseFloat(String(val).replace(/[^\d.]/g,""));if(isNaN(n))continue;if(x==null)return false;if(d.op===">="?x<n:x>n)return false;}}return true;}
+B.highlights=el=>{const v=S.hlv,uniq=a=>[...new Set(a.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
+const ctl=d=>{const val=v.f[d.k]||"",id="hf_"+d.k;let c;
+if(d.ty==="text")c=`<input type="text" id="${id}" data-hf="${d.k}" placeholder="${esc(d.l)}" value="${esc(val)}">`;
+else if(d.ty==="sel"){const opts=uniq(HL.flatMap(d.g));c=`<select id="${id}" data-hf="${d.k}"><option value="">${esc(d.l)}${opts.length?"":" (none in KLERQ data)"}</option>${opts.map(o=>`<option${o===val?" selected":""}>${esc(o)}</option>`).join("")}</select>`;}
+else if(d.ty==="yn")c=`<select id="${id}" data-hf="${d.k}"><option value="">${esc(d.l)}</option><option value="yes"${val==="yes"?" selected":""}>${esc(d.l)}: yes</option><option value="no"${val==="no"?" selected":""}>${esc(d.l)}: no</option></select>`;
+else if(d.ty==="date")c=`<input type="date" id="${id}" data-hf="${d.k}" value="${esc(val)}" aria-label="${esc(d.l)}" title="${esc(d.l)}">`;
+else c=`<input type="number" id="${id}" data-hf="${d.k}" placeholder="${esc(d.l)}" value="${esc(val)}" min="0" step="1">`;
+return d.ty==="date"?`<label class="hfd"><span>${esc(d.l)}</span>${c}</label>`:c;};
+const nAdv=HLF.filter(d=>!d.b&&v.f[d.k]).length,nAll=HLF.filter(d=>v.f[d.k]).length;
+el.innerHTML=`<div class="hlbar"><div class="hfg">${HLF.filter(d=>d.b).map(ctl).join("")}</div>${v.adv?`<div class="hfg">${HLF.filter(d=>!d.b).map(ctl).join("")}</div>`:""}<div class="hlchipsbar"><button type="button" class="chip" id="hfadv" aria-expanded="${v.adv}">${v.adv?"Fewer filters ▴":`More filters${nAdv?` (${nAdv} on)`:""} ▾`}</button><button type="button" class="chip" id="hfclr" style="display:${nAll?"inline-block":"none"}">Clear filters</button><span style="flex:1"></span><button type="button" class="chip${v.only==="rec"?" on":""}" data-only="rec">Recommended</button><button type="button" class="chip${v.only==="sel"?" on":""}" data-only="sel">Selected</button></div></div><p class="cnt" id="hlc" style="margin-top:10px"></p><div id="hllist"></div>`;
+const bar=()=>{const na=HLF.filter(d=>!d.b&&v.f[d.k]).length,nl=HLF.filter(d=>v.f[d.k]).length;$("hfclr").style.display=nl?"inline-block":"none";if(!v.adv)$("hfadv").textContent=`More filters${na?` (${na} on)`:""} ▾`;};
+const draw=()=>{bar();const idx=HL.map((h,i)=>i).filter(i=>{const h=HL[i];if(v.only==="rec"&&!h.rec)return false;if(v.only==="sel"&&!S.hl.has(i))return false;return hlPass(h,v.f);});
+$("hlc").textContent=`${S.hl.size} selected, one slide each · showing ${Math.min(idx.length,v.lim)} of ${idx.length}${idx.length!==HL.length?" matching":""}`;
+$("hllist").innerHTML=idx.slice(0,v.lim).map(i=>{const h=HL[i],on=S.hl.has(i),op=v.open===i;
+const ini=n=>n.split(/\s+/).filter(Boolean).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+const ppl=a=>a.map(n=>`<div class="hlp"><span class="av">${esc(ini(n))}</span>${esc(n)}</div>`).join("");
+const chips=a=>`<div class="hlchips2">${a.map(x=>`<span class="ch">${esc(x)}</span>`).join("")}</div>`;
+const ls=h.ls||SPL(h.sp).slice(0,1),ss=h.ss||SPL(h.sp).slice(1),comp=h.cs||[h.c];
+const blk=(k,x)=>x?`<p class="hlk">${k}</p>${x}`:"";
+const sum=h.s&&h.s!=="(no summary)"?h.s:"";
+const long=sum.length>260;
+const dates=[h.sd?"Start "+h.sd:"",h.ed?"End "+h.ed:""].filter(Boolean).join(" · ");
+return `<div class="hlc${on?" on":""}"><div class="hlmain"><div class="hlpills"><span class="pill ${/draft/i.test(h.st)?"dr":"ap"}">● ${esc(h.st)}</span>${h.conf?'<span class="pill cf">Confidential</span>':""}${h.v?`<span class="pill vr">${esc(h.v)}</span>`:""}${h.rec?'<span class="pill rc">Recommended</span>':""}<label class="hlsel"><input type="checkbox" data-hl="${i}"${on?" checked":""}> ${on?"Selected":"Select"}</label></div><div class="hlt">${esc(h.n)}</div>${sum?`<p class="hls${op?"":" cl"}">${esc(sum)}</p>${long?`<button type="button" class="hlmore2" data-tg="${i}">${op?"Show less":"Show more"}</button>`:""}`:'<p class="hls" style="color:#8792A0!important">No summary in KLERQ.</p>'}${h.rec?`<p class="hlwhy">${esc(h.rec)}</p>`:""}</div><div class="hlside">${blk(comp.length>1?"Companies":"Company",ppl(comp.filter(Boolean)).replace(/class="av"/g,'class="av" style="border-radius:4px"'))}${blk("Lead specialists",ls.length?ppl(ls):"")}${blk("Supporting specialists",ss.length?ppl(ss):"")}${blk("Offices",h.of&&h.of.length?chips(h.of):"")}${blk("Practices",h.pr&&h.pr.length?chips(h.pr):"")}${blk("Industries",h.ind&&h.ind.length?chips(h.ind):"")}${h.m||dates?`<p class="hlmeta2">${h.m?esc(h.m):""}${h.m&&dates?"<br>":""}${esc(dates)}</p>`:""}</div></div>`;}).join("")+(idx.length>v.lim?`<button type="button" class="mini" id="hlmore">Show ${Math.min(25,idx.length-v.lim)} more</button>`:"")+(!idx.length?'<p class="pv">No highlights match these filters.</p>':"");
+$("hllist").querySelectorAll("[data-hl]").forEach(c=>c.onchange=()=>{const i=+c.dataset.hl;c.checked?S.hl.add(i):S.hl.delete(i);S.cl.sel=null;draw();});
+$("hllist").querySelectorAll("[data-tg]").forEach(b=>b.onclick=e=>{e.preventDefault();const i=+b.dataset.tg;v.open=v.open===i?-1:i;draw();});
+const m=$("hlmore");if(m)m.onclick=e=>{e.preventDefault();v.lim+=25;draw();};};
+el.querySelectorAll("[data-hf]").forEach(x=>{const f=()=>{v.f[x.dataset.hf]=x.value;v.lim=25;draw();};x.oninput=f;x.onchange=f;});
+$("hfadv").onclick=e=>{e.preventDefault();v.adv=!v.adv;B.highlights(el);};
+$("hfclr").onclick=e=>{e.preventDefault();v.f={};v.lim=25;B.highlights(el);};
+el.querySelectorAll("[data-only]").forEach(b=>b.onclick=e=>{e.preventDefault();v.only=v.only===b.dataset.only?"":b.dataset.only;v.lim=25;B.highlights(el);});
+draw();};
+V.highlights=()=>S.hl.size?"":"Pick at least one highlight, or skip this chapter.";
+B.clients=el=>{const fromHl=new Set([...S.hl].map(i=>HL[i].c));if(S.cl.sel===null)S.cl.sel=new Set(CL.filter(c=>fromHl.has(c)));
+el.innerHTML=`<p class="cnt" id="clc"></p><div class="f"><input type="text" id="clf" placeholder="Filter clients" value="${esc(S.cl.f)}"></div><div id="cll" class="clgrid">`+CL.map((c,i)=>`<label class="chk" data-n="${esc(c.toLowerCase())}"><input type="checkbox" data-cl="${i}"${S.cl.sel.has(c)?" checked":""}> <span>${esc(c)}${fromHl.has(c)?'<span class="tag tg-rec">In your highlights</span>':""}</span></label>`).join("")+`</div>`;
+const cnt=()=>$("clc").textContent=S.cl.sel.size+" selected";cnt();
+const flt=()=>{const q=S.cl.f.toLowerCase();el.querySelectorAll("#cll .chk").forEach(l=>l.style.display=l.dataset.n.includes(q)?"flex":"none");};flt();
+$("clf").oninput=e=>{S.cl.f=e.target.value;flt();};el.querySelectorAll("[data-cl]").forEach(c=>c.onchange=()=>{const n=CL[+c.dataset.cl];c.checked?S.cl.sel.add(n):S.cl.sel.delete(n);cnt();});};
+V.clients=()=>S.cl.sel&&S.cl.sel.size?"":"Pick at least one client, or skip this chapter.";
+B.additional=el=>{let h="";AD.filter(a=>S.ad[a.k]).forEach(a=>{const st=S.ad[a.k];h+=`<div class="card on" style="cursor:default"><div style="flex:1"><div class="t">${a.n}</div><p class="meta">${a.d}</p><div class="sub">`;
+if(a.kind==="text")h+=textCards("ad_"+a.k,st,-1,"");else if(a.kind==="spec")h+=`<select data-adv="${a.k}">${SP.map(x=>`<option${st.v===x.n?" selected":""}>${esc(x.n)}</option>`).join("")}</select>`;else if(a.kind==="prac")h+=`<select data-adv="${a.k}">${PRAC.map(x=>`<option${st.v===x?" selected":""}>${esc(x)}</option>`).join("")}</select>`;else h+=`<p class="pv">This content isn't reachable from here. I'll look it up in KLERQ after you submit and show you the options.</p>`;
+h+=`</div></div></div>`;});el.innerHTML=h||`<p class="pv">No extra chapters ticked.</p>`;
+el.querySelectorAll("[data-adv]").forEach(s=>s.onchange=()=>S.ad[s.dataset.adv].v=s.value);
+AD.forEach(a=>{if(S.ad[a.k]&&a.kind==="text")bindText(el,"ad_"+a.k,S.ad[a.k]);});};
+V.additional=()=>{syncAd();return "";};
+function sum(k){switch(k){case"preface":case"scope":case"firm":return textSum(S[k]);
+case"specialists":return Object.entries(S.sp).map(([n,v])=>{const x=SP.find(s=>s.n===n);let b;if(v.bio==="ai")b="bio: Claude's version [see below]"+(v.aiEd!=null?" [edited in the form]":"");else if(v.bio===null)b="no bio"+(v.req?", Claude to write one":"");else b="bio: "+x.b[v.bio].n+" ["+x.b[v.bio].st+"]"+(v.ed&&v.ed[v.bio]!=null?" [edited, see below]":"")+(v.req?", Claude to tailor":"");return `${n} (${v.role}, ${b})`;}).join(" | ");
+case"pricing":return prSum()||"(not filled in)";
+case"practices":return [...(S.pc.sel||[])].join(" | ");
+case"industries":return [...S.ind.sel].join(" | ");
+case"highlights":return [...S.hl].sort((a,b)=>a-b).map(i=>`${hlName(HL[i])} [${HL[i].c}]`).join(" | ");
+case"clients":return [...(S.cl.sel||[])].join(" | ");
+default:{const a=AD.find(x=>x.k===k),st=S.ad[k];if(!a||!st)return"";return a.kind==="text"?textSum(st):a.kind==="none"?"Look up options after submit":st.v;}}}
+function slides(k){return k==="highlights"?S.hl.size:1;}
+B.overview=el=>{const inc=S.order.filter(k=>!S.skip[k]);const tot=1+inc.reduce((a,k)=>a+slides(k),0);
+let h=`<p class="cnt">${inc.length+1} chapters · about ${tot} slides</p><div class="ov"><div style="flex:1"><div class="t">General information${AI.general?'<span class="tag tg-ai">✦ Claude</span>':""}</div><p class="pv">${esc(S.g.title)} · ${esc(S.g.client)}${S.g.about?" · "+esc(S.g.about):""}</p></div><button type="button" class="mini" data-ed="general">Edit</button></div>`;
+S.order.forEach((k,i)=>{const off=!!S.skip[k];h+=`<div class="ov${off?" off":""}"><input type="checkbox" data-inc="${k}"${off?"":" checked"} aria-label="Include ${NM[k]}"><div style="flex:1"><div class="t">${NM[k]}${AI[k]&&!off?'<span class="tag tg-ai">✦ Claude</span>':""}</div><p class="pv">${off?"Left out":esc(sum(k)||"(nothing selected yet)")}</p></div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span><button type="button" class="mini" data-mv="${i}" data-d="-1" aria-label="Move up">↑</button> <button type="button" class="mini" data-mv="${i}" data-d="1" aria-label="Move down">↓</button></span><button type="button" class="mini" data-ed="${k}">Edit</button></div></div>`;});
+el.innerHTML=h;
+el.querySelectorAll("[data-inc]").forEach(c=>c.onchange=()=>{if(S.sent)return;c.checked?delete S.skip[c.dataset.inc]:S.skip[c.dataset.inc]=true;B.overview(el);});
+el.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{if(S.sent)return;const i=+b.dataset.mv,j=i+ +b.dataset.d;if(j<0||j>=S.order.length)return;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];B.overview(el);});
+el.querySelectorAll("[data-ed]").forEach(b=>b.onclick=()=>{if(S.sent)return;const k=b.dataset.ed;if(CH.includes(k))delete S.skip[k];S.k=AD.some(a=>a.k===k)?"additional":k;S.ret=true;render();});};
+V.overview=()=>{const bad=S.order.filter(k=>!S.skip[k]&&CH.includes(k)&&V[k]());return bad.length?`Finish or leave out: ${bad.map(k=>NM[k]).join(", ")}.`:"";};
+B.export=el=>{el.innerHTML=`<p class="l" style="font-size:16px">Do you want to export to PowerPoint?</p><label class="chk"><input type="radio" name="exp" value="ppt"${S.exp==="ppt"?" checked":""}> Yes, fill my PowerPoint template</label><label class="chk"><input type="radio" name="exp" value="none"${S.exp==="none"?" checked":""}> No, only create it in KLERQ</label>${S.exp==="ppt"?`<div class="upl"><p class="t" style="font-size:14px;margin:0 0 4px">Upload your template here</p><p class="pv" style="margin:0">After you press Approve, attach your template (.pptx or .potx) to your next message with the paperclip in the chat. Claude fills it with this presentation and gives you the finished PowerPoint.</p></div>`:""}`;el.querySelectorAll("input[name=exp]").forEach(r=>r.onchange=()=>{S.exp=r.value;B.export(el);});};
+V.export=()=>S.exp?"":"Choose Yes or No first.";
+function buildText(){if(PH==="general"){const G=["[Presentation form] General","Title: "+S.g.title,"Client: "+S.g.client+(CL.includes(S.g.client.trim())?"":" (not in KLERQ)")];if(S.g.about)G.push("About: "+S.g.about);return G.join("\n");}const inc=S.order.filter(k=>!S.skip[k]),sk=S.order.filter(k=>S.skip[k]);const L=["[Presentation form] Approve","Title: "+S.g.title,"Client: "+S.g.client+(CL.includes(S.g.client.trim())?"":" (not in KLERQ)")];if(S.g.about)L.push("About: "+S.g.about);
+L.push("Order: General information | "+inc.map(k=>NM[k]).join(" | "));if(sk.length)L.push("Left out: "+sk.map(k=>NM[k]).join(" | "));inc.forEach(k=>L.push(NM[k]+": "+sum(k)));L.push("Export: "+(S.exp==="ppt"?"PowerPoint, the user will attach their template":"none, only create it in KLERQ"));if(inc.includes("specialists"))Object.entries(S.sp).forEach(([n,v])=>{const x=SP.find(s=>s.n===n);if(v.bio==="ai")L.push("","--- Claude's bio: "+n+" ---",v.aiEd!=null?v.aiEd:(BD[n]||""),"--- end ---");else if(v.bio!==null&&v.ed&&v.ed[v.bio]!=null)L.push("","--- Edited bio: "+n+" ---",v.ed[v.bio],"--- end ---");});inc.forEach(k=>{const st=["preface","scope","firm"].includes(k)?S[k]:S.ad[k];if(st&&typeof st.c==="number"&&st.ed&&st.ed[st.c]!=null)L.push("","--- Edited text: "+NM[k]+" ---",st.ed[st.c],"--- end ---");if(st&&st.c==="ai")L.push("","--- Claude's draft: "+NM[k]+" ---",st.aiEd!=null?st.aiEd:(AIDR[k]||""),"--- end ---");});return L.join("\n");}
+function trySend(txt){const m=$("sm");try{if(typeof sendPrompt!=="function")throw new Error("unavailable");sendPrompt(txt);m.textContent="Sent to the chat. If it doesn't appear there, copy the answers below and paste them in.";}catch(e){m.textContent="Couldn't send automatically. Copy the answers below and paste them into the chat.";}}
+function send(){const txt=buildText();const box=document.createElement("div");box.className="sub";box.innerHTML=`<p class="l">${PH==="general"?"Your first chapter":"Your answers"}</p>${PH==="general"?'<p class="meta">The other chapters open in the next box as soon as this arrives.</p>':""}<p class="ok" id="sm"></p><textarea id="out" rows="10" readonly style="margin-top:8px">${esc(txt)}</textarea><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="mini" id="cp">Copy answers</button><button type="button" class="mini" id="rs">Try sending again ↗</button></div><p class="meta" id="cpm"></p>`;$("body").appendChild(box);
+$("cp").onclick=()=>{const t=$("out");t.focus();t.select();let ok=false;try{ok=document.execCommand("copy");}catch(e){}const done=r=>$("cpm").textContent=r?"Copied. Paste it into the chat.":"Select the text above and copy it with Ctrl+C or Cmd+C.";if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(ok));else done(ok);};
+$("rs").onclick=()=>trySend(txt);trySend(txt);box.scrollIntoView({block:"nearest"});}
+function render(){const L=ST(),k=S.k,i=Math.max(0,L.indexOf(k));
+app.innerHTML=`<p class="eb">Step ${i+1} of ${L.length}${S.g.client?" · "+esc(S.g.client):""}</p><div class="bar"><i style="width:${Math.round((i+1)/L.length*100)}%"></i></div><h3>${NM[k]}</h3><p class="s">${HINT[k]}</p><div id="body"></div><p class="err" id="err"></p><div class="row">${i>0?'<button type="button" class="sk" id="back" style="margin-right:auto">← Back</button>':""}${CH.includes(k)?'<button type="button" class="sk" id="skip">Skip this chapter</button>':""}<button type="button" class="go" id="go">${k==="export"?"Approve and send ↗":S.ret?"Back to overview →":"Continue →"}</button></div>`;
+B[k]($("body"));if(AI[k]&&k!=="brief")$("body").insertAdjacentHTML("afterbegin",`<div class="ai"><span aria-hidden="true">✦</span><span><b>Filled in by Claude from your brief.</b> ${esc(AI[k])}</span></div>`);
+const nxt=(from)=>{const LL=from||ST();if(S.ret&&k!=="overview"&&k!=="export"){S.ret=false;S.k="overview";}else S.k=LL[LL.indexOf(k)+1]||"overview";render();app.scrollIntoView({block:"nearest"});};
+if($("back"))$("back").onclick=()=>{if(S.sent)return;const LL=ST();S.k=LL[Math.max(0,LL.indexOf(k)-1)];S.ret=false;render();};
+if($("skip"))$("skip").onclick=()=>{const LL=ST();S.skip[k]=true;nxt(LL);};
+$("go").onclick=()=>{if(S.sent)return;const e=V[k]();if(e){$("err").textContent=e;return;}$("err").textContent="";if(CH.includes(k))delete S.skip[k];if(k==="export"||PH==="general"){S.sent=true;$("go").textContent="Sent ✓";send();return;}nxt();};}
+render();
+</script>

@@ -1,0 +1,11 @@
+{
+  "name": "klerq-deck-builder",
+  "version": "1.0.0",
+  "description": "Build a client pitch from KLERQ content: interview the user chapter by chapter, create the presentation in KLERQ, and export it to PowerPoint.",
+  "author": {
+    "name": "KLERQ"
+  },
+  "repository": "https://github.com/KLERQ1/klerq-presentations-plugin",
+  "keywords": ["klerq", "presentation", "pitch", "legal", "business-development"],
+  "mcpServers": "./.mcp.json"
+}
