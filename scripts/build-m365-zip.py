@@ -1,25 +1,33 @@
 """Build the Microsoft 365 Copilot app package (declarative agent + MCP plugins).
 
 Usage (from the repo root):
-    python scripts/build-m365-zip.py                      # keeps the auth placeholder
-    python scripts/build-m365-zip.py --auth-ref <auth config id from Agents Toolkit / Teams developer portal>
-    python scripts/build-m365-zip.py --app-id <guid>      # override the app id
+    python scripts/build-m365-zip.py --auth-ref <auth config id>                 # KLERQ's own workspace
+    python scripts/build-m365-zip.py --tenant acme --auth-ref <that customer's auth config id>
+    python scripts/build-m365-zip.py --app-id <guid>                             # override the app id
 
-Output: ../klerq-deck-builder-m365.zip next to the repo folder (Desktop).
+Every workspace has its own MCP address (<tenant>.mcp.klerq.app) and therefore its own
+OAuth client registration in the Teams developer portal (its Base URL is that address), so
+a customer package needs that customer's auth config id. The app id is derived from the
+tenant so packages for different customers never collide.
+
+Output: ../klerq-deck-builder-m365[-<tenant>].zip next to the repo folder (Desktop).
 Files go at the ZIP ROOT (no folder inside), as the admin center expects.
 """
-import argparse, json, pathlib, re, sys, zipfile
+import argparse, json, pathlib, re, sys, uuid, zipfile
 from PIL import Image
+from tenant import mcp_url, mcp_host, out_name
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "m365"
-OUT = ROOT.parent / "klerq-deck-builder-m365.zip"
 FILES = ["manifest.json", "declarativeAgent.json", "klerq-plugin.json", "klerq-tools.json", "color.png", "outline.png"]
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--auth-ref", help="OAuthPluginVault reference_id (auth config id) for the KLERQ MCP server")
 ap.add_argument("--app-id", help="App id GUID for manifest.json")
+ap.add_argument("--tenant", help="Workspace label: the package points at <tenant>.mcp.klerq.app (default: klerq)")
 args = ap.parse_args()
+TENANT = args.tenant or "klerq"
+OUT = ROOT.parent / out_name("klerq-deck-builder-m365", args.tenant)
 
 errors, warnings = [], []
 def load(name):
@@ -31,6 +39,13 @@ def load(name):
 manifest, agent, klerq, tools = (load(n) for n in FILES[:4])
 if errors:
     sys.exit("\n".join(errors))
+
+# --- workspace ---
+klerq["runtimes"][0]["spec"]["url"] = mcp_url(TENANT)
+manifest["validDomains"] = [mcp_host(TENANT)]
+if args.tenant:
+    # Stable per-tenant app id, so two customers' packages are distinct apps.
+    manifest["id"] = str(uuid.uuid5(uuid.NAMESPACE_DNS, mcp_host(TENANT)))
 
 # --- overrides ---
 if args.app_id:
@@ -105,4 +120,4 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
     names = z.namelist()
 print(f"wrote {OUT} ({OUT.stat().st_size} bytes)")
 for nme in names: print(" ", nme)
-print(f"instructions: {n} characters; app id {manifest['id']}; KLERQ auth: {klerq['runtimes'][0]['auth']}")
+print(f"workspace: {mcp_url(TENANT)}; instructions: {n} characters; app id {manifest['id']}; KLERQ auth: {klerq['runtimes'][0]['auth']}")

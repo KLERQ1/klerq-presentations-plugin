@@ -32,7 +32,7 @@ npx plugins add ./klerq-deck-builder                      # local folder, for te
 npx plugins add KLERQ1/klerq-presentations-plugin         # from GitHub
 ```
 
-For Claude.ai, zip the folder (without `.git`) and upload it as a plugin. For Claude Code,
+For Claude.ai, run `python scripts/build-claude-zip.py` and upload the zip as a plugin. For Claude Code,
 install it from the same repository.
 
 The CLI detects the agent tools on your machine and installs to each of them, translating
@@ -80,6 +80,19 @@ together.
 Until the server release that carries the form tools is live, Claude.ai falls back to the
 widget form and every other client to plain chat mode. No separate form server is needed or
 configured any more.
+
+## Packages per customer
+
+Every workspace has its own MCP address (`<workspace>.mcp.klerq.app`). The three builders take
+`--tenant <workspace>` and write `…-<workspace>.zip`; `docs/customer-setup.md` has the steps a
+customer follows in Claude, ChatGPT and Microsoft 365 Copilot, including adding the server by
+URL without any package.
+
+```bash
+python scripts/build-claude-zip.py  --tenant acme
+python scripts/build-chatgpt-zip.py --tenant acme
+python scripts/build-m365-zip.py    --tenant acme --auth-ref <that customer's auth config id>
+```
 
 ## ChatGPT package
 

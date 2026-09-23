@@ -6,21 +6,24 @@ two square images) and, when the plugin uses MCP servers, an `.app.json` that
 maps each server to the app you registered in ChatGPT developer mode.
 
 Usage (from the repo root):
-    python scripts/build-chatgpt-zip.py                       # skills + mcp.json, no app mapping
-    python scripts/build-chatgpt-zip.py klerq=asdk_app_xxx klerq-form=asdk_app_yyy
+    python scripts/build-chatgpt-zip.py                       # KLERQ's own workspace, no app mapping
+    python scripts/build-chatgpt-zip.py --tenant acme         # a customer's workspace (acme.mcp.klerq.app)
+    python scripts/build-chatgpt-zip.py --tenant acme klerq=asdk_app_xxx
 
-Output: ../klerq-deck-builder-chatgpt.zip next to the repo folder (Desktop).
+Output: ../klerq-deck-builder-chatgpt[-<tenant>].zip next to the repo folder (Desktop).
 """
+from tenant import parse_tenant, mcp_url, out_name
 import json, re, sys, zipfile, pathlib
 from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT.parent / "klerq-deck-builder-chatgpt.zip"
+TENANT, ARGS = parse_tenant(sys.argv[1:])
+OUT = ROOT.parent / out_name("klerq-deck-builder-chatgpt", TENANT)
 DARK = (28, 37, 48)  # KLERQ card background #1C2530
 
 # --- app ids from the command line: name=id ---
 apps = {}
-for arg in sys.argv[1:]:
+for arg in ARGS:
     m = re.fullmatch(r"([a-z0-9-]+)=(\S+)", arg)
     if not m:
         sys.exit(f"bad argument {arg!r}: expected name=id")
@@ -84,7 +87,9 @@ if OUT.exists():
     OUT.unlink()
 with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
     z.writestr("plugin.json", json.dumps(manifest, indent=2) + "\n")
-    z.write(ROOT / "mcp.json", "mcp.json")
+    mcp = json.loads((ROOT / "mcp.json").read_text(encoding="utf-8"))
+    mcp["mcpServers"]["klerq"]["url"] = mcp_url(TENANT)
+    z.writestr("mcp.json", json.dumps(mcp, indent=2) + "\n")
     if apps:
         z.writestr(".app.json", json.dumps({"apps": apps}, indent=2) + "\n")
     z.write(ROOT / "README.md", "README.md")
@@ -95,7 +100,8 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
             z.write(p, p.relative_to(ROOT).as_posix())
     names = z.namelist()
 print(f"wrote {OUT} ({OUT.stat().st_size} bytes, {len(names)} entries)")
-print("app mapping:", json.dumps(apps) if apps else "none (register the MCP servers in ChatGPT and pass name=id)")
+print("workspace:", mcp_url(TENANT))
+print("app mapping:", json.dumps(apps) if apps else "none (register the KLERQ MCP server in ChatGPT and pass klerq=<id>)")
 for n in names:
     if "/" not in n or n.startswith("assets/"):
         print(" ", n)
